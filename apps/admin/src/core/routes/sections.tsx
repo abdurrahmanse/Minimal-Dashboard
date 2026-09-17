@@ -1,52 +1,25 @@
 import type { RouteObject } from 'react-router';
 
-import Box from '@mui/material/Box';
-import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
-import { varAlpha } from 'minimal-shared/utils';
-import { lazy, Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
+import BlogPage from 'src/pages/blog';
+import DashboardPage from 'src/pages/dashboard';
+import ForgotPasswordPage from 'src/pages/forgot-password';
+import Page404 from 'src/pages/page-not-found';
+import ProductsPage from 'src/pages/products';
+import SignInPage from 'src/pages/sign-in';
+import SignUpPage from 'src/pages/sign-up';
+import UserPage from 'src/pages/user';
+import VerifyOtpPage from 'src/pages/verify-otp';
 import { AuthLayout } from 'src/shared/layouts/auth';
 import { DashboardLayout } from 'src/shared/layouts/dashboard';
 
 // ----------------------------------------------------------------------
 
-export const DashboardPage = lazy(() => import('src/pages/dashboard'));
-export const BlogPage = lazy(() => import('src/pages/blog'));
-export const UserPage = lazy(() => import('src/pages/user'));
-export const SignInPage = lazy(() => import('src/pages/sign-in'));
-export const SignUpPage = lazy(() => import('src/pages/sign-up'));
-export const ForgotPasswordPage = lazy(() => import('src/pages/forgot-password'));
-export const VerifyOtpPage = lazy(() => import('src/pages/verify-otp'));
-export const ProductsPage = lazy(() => import('src/pages/products'));
-export const Page404 = lazy(() => import('src/pages/page-not-found'));
-
-const renderFallback = () => (
-  <Box
-    sx={{
-      display: 'flex',
-      flex: '1 1 auto',
-      alignItems: 'center',
-      justifyContent: 'center',
-    }}
-  >
-    <LinearProgress
-      sx={{
-        width: 1,
-        maxWidth: 320,
-        bgcolor: (theme) => varAlpha(theme.vars.palette.text.primaryChannel, 0.16),
-        [`& .${linearProgressClasses.bar}`]: { bgcolor: 'text.primary' },
-      }}
-    />
-  </Box>
-);
-
 export const routesSection: RouteObject[] = [
   {
     element: (
       <DashboardLayout>
-        <Suspense fallback={renderFallback()}>
-          <Outlet />
-        </Suspense>
+        <Outlet />
       </DashboardLayout>
     ),
     children: [
