@@ -2,85 +2,37 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Pagination from '@mui/material/Pagination';
 import Typography from '@mui/material/Typography';
-import { useCallback, useState } from 'react';
 import { DashboardContent } from 'src/shared/layouts/dashboard';
 import { _products } from 'src/shared/mocks';
 
-import type { FiltersProps } from '../components/product-filters';
+import { CartIcon } from '../../../components/product-cart-widget';
+import { ProductFilters } from '../../../components/product-filters';
+import { ProductItem } from '../../../components/product-item';
+import { ProductSort } from '../../../components/product-sort';
 
-import { CartIcon } from '../components/product-cart-widget';
-import { ProductFilters } from '../components/product-filters';
-import { ProductItem } from '../components/product-item';
-import { ProductSort } from '../components/product-sort';
+import { useProductsView } from '../hooks/use-products-view';
+import {
+  GENDER_OPTIONS,
+  CATEGORY_OPTIONS,
+  RATING_OPTIONS,
+  PRICE_OPTIONS,
+  COLOR_OPTIONS,
+} from '../../../constants';
 
 // ----------------------------------------------------------------------
 
-const GENDER_OPTIONS = [
-  { value: 'men', label: 'Men' },
-  { value: 'women', label: 'Women' },
-  { value: 'kids', label: 'Kids' },
-];
-
-const CATEGORY_OPTIONS = [
-  { value: 'all', label: 'All' },
-  { value: 'shose', label: 'Shose' },
-  { value: 'apparel', label: 'Apparel' },
-  { value: 'accessories', label: 'Accessories' },
-];
-
-const RATING_OPTIONS = ['up4Star', 'up3Star', 'up2Star', 'up1Star'];
-
-const PRICE_OPTIONS = [
-  { value: 'below', label: 'Below $25' },
-  { value: 'between', label: 'Between $25 - $75' },
-  { value: 'above', label: 'Above $75' },
-];
-
-const COLOR_OPTIONS = [
-  '#00AB55',
-  '#000000',
-  '#FFFFFF',
-  '#FFC0CB',
-  '#FF4842',
-  '#1890FF',
-  '#94D82D',
-  '#FFC107',
-];
-
-const defaultFilters = {
-  price: '',
-  gender: [GENDER_OPTIONS[0].value],
-  colors: [COLOR_OPTIONS[4]],
-  rating: RATING_OPTIONS[0],
-  category: CATEGORY_OPTIONS[0].value,
-};
-
 export function ProductsView() {
-  const [sortBy, setSortBy] = useState('featured');
-
-  const [openFilter, setOpenFilter] = useState(false);
-
-  const [filters, setFilters] = useState<FiltersProps>(defaultFilters);
-
-  const handleOpenFilter = useCallback(() => {
-    setOpenFilter(true);
-  }, []);
-
-  const handleCloseFilter = useCallback(() => {
-    setOpenFilter(false);
-  }, []);
-
-  const handleSort = useCallback((newSort: string) => {
-    setSortBy(newSort);
-  }, []);
-
-  const handleSetFilters = useCallback((updateState: Partial<FiltersProps>) => {
-    setFilters((prevValue: FiltersProps) => ({ ...prevValue, ...updateState }));
-  }, []);
-
-  const canReset = Object.keys(filters).some(
-    (key) => filters[key as keyof FiltersProps] !== defaultFilters[key as keyof FiltersProps]
-  );
+  const {
+    sortBy,
+    openFilter,
+    filters,
+    canReset,
+    handleOpenFilter,
+    handleCloseFilter,
+    handleSort,
+    handleSetFilters,
+    handleResetFilter,
+  } = useProductsView();
 
   return (
     <DashboardContent>
@@ -113,7 +65,7 @@ export function ProductsView() {
             openFilter={openFilter}
             onOpenFilter={handleOpenFilter}
             onCloseFilter={handleCloseFilter}
-            onResetFilter={() => setFilters(defaultFilters)}
+            onResetFilter={handleResetFilter}
             options={{
               genders: GENDER_OPTIONS,
               categories: CATEGORY_OPTIONS,

@@ -1,31 +1,15 @@
-import type { ButtonProps } from '@mui/material/Button';
-
 import Button from '@mui/material/Button';
 import MenuItem, { menuItemClasses } from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
-import { useCallback, useState } from 'react';
 import { Iconify } from 'src/shared/components/iconify';
 
-// ----------------------------------------------------------------------
-
-type ProductSortProps = ButtonProps & {
-  sortBy: string;
-  onSort: (newSort: string) => void;
-  options: { value: string; label: string }[];
-};
+import type { ProductSortProps } from '../types';
+import { useProductSort } from '../hooks/use-product-sort';
 
 export function ProductSort({ options, sortBy, onSort, sx, ...other }: ProductSortProps) {
-  const [openPopover, setOpenPopover] = useState<HTMLButtonElement | null>(null);
-
-  const handleOpenPopover = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
-    setOpenPopover(event.currentTarget);
-  }, []);
-
-  const handleClosePopover = useCallback(() => {
-    setOpenPopover(null);
-  }, []);
+  const { openPopover, handleOpenPopover, handleClosePopover } = useProductSort();
 
   return (
     <>

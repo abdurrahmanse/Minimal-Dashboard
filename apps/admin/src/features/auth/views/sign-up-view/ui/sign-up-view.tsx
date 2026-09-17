@@ -6,21 +6,13 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { useCallback, useState } from 'react';
 import { RouterLink } from 'src/core/routes/components';
-import { useRouter } from 'src/core/routes/hooks';
 import { Iconify } from 'src/shared/components/iconify';
 
-// ----------------------------------------------------------------------
+import { useSignUp } from '../hooks/use-sign-up';
 
-export function SignInView() {
-  const router = useRouter();
-
-  const [showPassword, setShowPassword] = useState(false);
-
-  const handleSignIn = useCallback(() => {
-    router.push('/');
-  }, [router]);
+export function SignUpView() {
+  const { showPassword, setShowPassword, handleSignUp } = useSignUp();
 
   const renderForm = (
     <Box
@@ -30,26 +22,39 @@ export function SignInView() {
         flexDirection: 'column',
       }}
     >
+      <Box sx={{ display: 'flex', gap: 2, mb: 3, width: '100%' }}>
+        <TextField
+          fullWidth
+          name="firstName"
+          label="First name"
+          slotProps={{
+            inputLabel: { shrink: true },
+          }}
+        />
+        <TextField
+          fullWidth
+          name="lastName"
+          label="Last name"
+          slotProps={{
+            inputLabel: { shrink: true },
+          }}
+        />
+      </Box>
+
       <TextField
         fullWidth
         name="email"
         label="Email address"
-        defaultValue="hello@gmail.com"
         sx={{ mb: 3 }}
         slotProps={{
           inputLabel: { shrink: true },
         }}
       />
 
-      <Link component={RouterLink} href="/forgot-password" variant="body2" color="inherit" sx={{ mb: 1.5 }}>
-        Forgot password?
-      </Link>
-
       <TextField
         fullWidth
         name="password"
         label="Password"
-        defaultValue="@demo1234"
         type={showPassword ? 'text' : 'password'}
         slotProps={{
           inputLabel: { shrink: true },
@@ -72,9 +77,9 @@ export function SignInView() {
         type="submit"
         color="inherit"
         variant="contained"
-        onClick={handleSignIn}
+        onClick={handleSignUp}
       >
-        Sign in
+        Sign up
       </Button>
     </Box>
   );
@@ -90,16 +95,16 @@ export function SignInView() {
           mb: 5,
         }}
       >
-        <Typography variant="h5">Sign in</Typography>
+        <Typography variant="h5">Sign up</Typography>
         <Typography
           variant="body2"
           sx={{
             color: 'text.secondary',
           }}
         >
-          Don’t have an account?
-          <Link component={RouterLink} href="/sign-up" variant="subtitle2" sx={{ ml: 0.5 }}>
-            Get started
+          Already have an account?
+          <Link component={RouterLink} href="/sign-in" variant="subtitle2" sx={{ ml: 0.5 }}>
+            Sign in
           </Link>
         </Typography>
       </Box>

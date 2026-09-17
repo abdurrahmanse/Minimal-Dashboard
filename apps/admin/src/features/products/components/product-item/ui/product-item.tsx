@@ -6,18 +6,7 @@ import Typography from '@mui/material/Typography';
 import { ColorPreview } from 'src/shared/components/color-utils';
 import { Label } from 'src/shared/components/label';
 import { fCurrency } from 'src/shared/utils/format-number';
-
-// ----------------------------------------------------------------------
-
-export type ProductItemProps = {
-  id: string;
-  name: string;
-  price: number;
-  status: string;
-  coverUrl: string;
-  colors: string[];
-  priceSale: number | null;
-};
+import type { ProductItemProps } from '../types';
 
 export function ProductItem({ product }: { product: ProductItemProps }) {
   const renderStatus = (
