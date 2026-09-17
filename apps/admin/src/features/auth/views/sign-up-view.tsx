@@ -7,6 +7,7 @@ import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { useCallback, useState } from 'react';
+import { RouterLink } from 'src/core/routes/components';
 import { useRouter } from 'src/core/routes/hooks';
 import { Iconify } from 'src/shared/components/iconify';
 
@@ -110,7 +111,7 @@ export function SignUpView() {
           }}
         >
           Already have an account?
-          <Link href="/sign-in" variant="subtitle2" sx={{ ml: 0.5 }}>
+          <Link component={RouterLink} href="/sign-in" variant="subtitle2" sx={{ ml: 0.5 }}>
             Sign in
           </Link>
         </Typography>

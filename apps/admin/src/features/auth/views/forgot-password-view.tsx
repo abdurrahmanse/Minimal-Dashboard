@@ -4,6 +4,7 @@ import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { useCallback } from 'react';
+import { RouterLink } from 'src/core/routes/components';
 import { useRouter } from 'src/core/routes/hooks';
 import { Iconify } from 'src/shared/components/iconify';
 
@@ -69,6 +70,7 @@ export function ForgotPasswordView() {
         </Button>
 
         <Link
+          component={RouterLink}
           href="/sign-in"
           variant="subtitle2"
           color="inherit"
