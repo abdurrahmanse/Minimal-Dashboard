@@ -1,5 +1,5 @@
 import { CONFIG } from 'src/config-global';
-import { ProductsView } from 'src/sections/product/view';
+import { ProductsView } from 'src/features/products/views';
 
 // ----------------------------------------------------------------------
 

@@ -1,14 +1,14 @@
 import { CONFIG } from 'src/config-global';
-import { NotFoundView } from 'src/features/error/views';
+import { ForgotPasswordView } from 'src/features/auth/views';
 
 // ----------------------------------------------------------------------
 
 export default function Page() {
   return (
     <>
-      <title>{`404 page not found! | Error - ${CONFIG.appName}`}</title>
+      <title>{`Forgot Password - ${CONFIG.appName}`}</title>
 
-      <NotFoundView />
+      <ForgotPasswordView />
     </>
   );
 }
