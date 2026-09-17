@@ -1,5 +1,7 @@
 import { useCallback, useState } from 'react';
+
 import type { FiltersProps } from '../../../components/product-filters';
+
 import { DEFAULT_FILTERS } from '../../../constants';
 
 export function useProductsView() {

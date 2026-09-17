@@ -5,28 +5,21 @@ import Typography from '@mui/material/Typography';
 import { RouterLink } from 'src/core/routes/components';
 import { Logo } from 'src/shared/components/logo';
 
+import * as styles from './not-found-view.styles';
+
 // ----------------------------------------------------------------------
 
 export function NotFoundView() {
   return (
     <>
-      <Logo sx={{ position: 'fixed', top: 20, left: 20 }} />
+      <Logo sx={styles.logoStyle} />
 
-      <Container
-        sx={{
-          py: 10,
-          flexGrow: 1,
-          display: 'flex',
-          alignItems: 'center',
-          flexDirection: 'column',
-          justifyContent: 'center',
-        }}
-      >
-        <Typography variant="h3" sx={{ mb: 2 }}>
+      <Container sx={styles.containerStyle}>
+        <Typography variant="h3" sx={styles.titleStyle}>
           Sorry, page not found!
         </Typography>
 
-        <Typography sx={{ color: 'text.secondary', maxWidth: 480, textAlign: 'center' }}>
+        <Typography sx={styles.descriptionStyle}>
           Sorry, we couldn’t find the page you’re looking for. Perhaps you’ve mistyped the URL? Be
           sure to check your spelling.
         </Typography>
@@ -34,11 +27,7 @@ export function NotFoundView() {
         <Box
           component="img"
           src="/assets/illustrations/illustration-404.svg"
-          sx={{
-            width: 320,
-            height: 'auto',
-            my: { xs: 5, sm: 10 },
-          }}
+          sx={styles.imageStyle}
         />
 
         <Button component={RouterLink} href="/" size="large" variant="contained" color="inherit">

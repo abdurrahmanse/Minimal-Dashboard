@@ -6,20 +6,17 @@ import Typography from '@mui/material/Typography';
 import { ColorPreview } from 'src/shared/components/color-utils';
 import { Label } from 'src/shared/components/label';
 import { fCurrency } from 'src/shared/utils/format-number';
+
 import type { ProductItemProps } from '../types';
+
+import * as styles from './product-item.styles';
 
 export function ProductItem({ product }: { product: ProductItemProps }) {
   const renderStatus = (
     <Label
       variant="inverted"
       color={(product.status === 'sale' && 'error') || 'info'}
-      sx={{
-        zIndex: 9,
-        top: 16,
-        right: 16,
-        position: 'absolute',
-        textTransform: 'uppercase',
-      }}
+      sx={styles.labelStyle}
     >
       {product.status}
     </Label>
@@ -30,13 +27,7 @@ export function ProductItem({ product }: { product: ProductItemProps }) {
       component="img"
       alt={product.name}
       src={product.coverUrl}
-      sx={{
-        top: 0,
-        width: 1,
-        height: 1,
-        objectFit: 'cover',
-        position: 'absolute',
-      }}
+      sx={styles.imgStyle}
     />
   );
 
@@ -45,10 +36,7 @@ export function ProductItem({ product }: { product: ProductItemProps }) {
       <Typography
         component="span"
         variant="body1"
-        sx={{
-          color: 'text.disabled',
-          textDecoration: 'line-through',
-        }}
+        sx={styles.priceSaleStyle}
       >
         {product.priceSale && fCurrency(product.priceSale)}
       </Typography>
@@ -59,23 +47,17 @@ export function ProductItem({ product }: { product: ProductItemProps }) {
 
   return (
     <Card>
-      <Box sx={{ pt: '100%', position: 'relative' }}>
+      <Box sx={styles.imageBoxStyle}>
         {product.status && renderStatus}
         {renderImg}
       </Box>
 
-      <Stack spacing={2} sx={{ p: 3 }}>
+      <Stack spacing={2} sx={styles.contentStackStyle}>
         <Link color="inherit" underline="hover" variant="subtitle2" noWrap>
           {product.name}
         </Link>
 
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}
-        >
+        <Box sx={styles.infoBoxStyle}>
           <ColorPreview colors={product.colors} />
           {renderPrice}
         </Box>

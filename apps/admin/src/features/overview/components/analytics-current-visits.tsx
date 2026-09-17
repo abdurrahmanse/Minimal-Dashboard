@@ -8,6 +8,8 @@ import { useTheme } from '@mui/material/styles';
 import { Chart, ChartLegends, useChart } from 'src/shared/components/chart';
 import { fNumber } from 'src/shared/utils/format-number';
 
+import * as styles from './analytics-current-visits.styles';
+
 // ----------------------------------------------------------------------
 
 type Props = CardProps & {
@@ -59,20 +61,15 @@ export function AnalyticsCurrentVisits({ title, subheader, chart, sx, ...other }
         type="pie"
         series={chartSeries}
         options={chartOptions}
-        sx={{
-          my: 6,
-          mx: 'auto',
-          width: { xs: 240, xl: 260 },
-          height: { xs: 240, xl: 260 },
-        }}
+        sx={styles.chartStyle}
       />
 
-      <Divider sx={{ borderStyle: 'dashed' }} />
+      <Divider sx={styles.dividerStyle} />
 
       <ChartLegends
         labels={chartOptions?.labels}
         colors={chartOptions?.colors as string[]}
-        sx={{ p: 3, justifyContent: 'center' }}
+        sx={styles.chartLegendsStyle}
       />
     </Card>
   );

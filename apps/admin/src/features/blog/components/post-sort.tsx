@@ -8,6 +8,8 @@ import { varAlpha } from 'minimal-shared/utils';
 import { useCallback, useState } from 'react';
 import { Iconify } from 'src/shared/components/iconify';
 
+import * as styles from './post-sort.styles';
+
 // ----------------------------------------------------------------------
 
 type PostSortProps = ButtonProps & {
@@ -36,17 +38,10 @@ export function PostSort({ options, sortBy, onSort, sx, ...other }: PostSortProp
         endIcon={
           <Iconify
             icon={openPopover ? 'eva:arrow-ios-upward-fill' : 'eva:arrow-ios-downward-fill'}
-            sx={{
-              ml: -0.5,
-            }}
+            sx={styles.iconStyle}
           />
         }
-        sx={[
-          {
-            bgcolor: (theme) => varAlpha(theme.vars.palette.grey['500Channel'], 0.08),
-          },
-          ...(Array.isArray(sx) ? sx : [sx]),
-        ]}
+        sx={styles.buttonStyle(sx)}
         {...other}
       >
         {options.find((option) => option.value === sortBy)?.label}
@@ -61,19 +56,7 @@ export function PostSort({ options, sortBy, onSort, sx, ...other }: PostSortProp
       >
         <MenuList
           disablePadding
-          sx={{
-            p: 0.5,
-            gap: 0.5,
-            width: 160,
-            display: 'flex',
-            flexDirection: 'column',
-            [`& .${menuItemClasses.root}`]: {
-              px: 1,
-              gap: 2,
-              borderRadius: 0.75,
-              [`&.${menuItemClasses.selected}`]: { bgcolor: 'action.selected' },
-            },
-          }}
+          sx={styles.menuListStyle}
         >
           {options.map((option) => (
             <MenuItem

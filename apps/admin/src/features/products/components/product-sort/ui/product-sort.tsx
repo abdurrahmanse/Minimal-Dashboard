@@ -6,7 +6,9 @@ import Typography from '@mui/material/Typography';
 import { Iconify } from 'src/shared/components/iconify';
 
 import type { ProductSortProps } from '../types';
+
 import { useProductSort } from '../hooks/use-product-sort';
+import * as styles from './product-sort.styles';
 
 export function ProductSort({ options, sortBy, onSort, sx, ...other }: ProductSortProps) {
   const { openPopover, handleOpenPopover, handleClosePopover } = useProductSort();
@@ -26,7 +28,7 @@ export function ProductSort({ options, sortBy, onSort, sx, ...other }: ProductSo
         {...other}
       >
         Sort By:&nbsp;
-        <Typography component="span" variant="subtitle2" sx={{ color: 'text.secondary' }}>
+        <Typography component="span" variant="subtitle2" sx={styles.textStyle}>
           {options.find((option) => option.value === sortBy)?.label}
         </Typography>
       </Button>
@@ -40,19 +42,7 @@ export function ProductSort({ options, sortBy, onSort, sx, ...other }: ProductSo
       >
         <MenuList
           disablePadding
-          sx={{
-            p: 0.5,
-            gap: 0.5,
-            width: 160,
-            display: 'flex',
-            flexDirection: 'column',
-            [`& .${menuItemClasses.root}`]: {
-              px: 1,
-              gap: 2,
-              borderRadius: 0.75,
-              [`&.${menuItemClasses.selected}`]: { bgcolor: 'action.selected' },
-            },
-          }}
+          sx={styles.menuListStyle}
         >
           {options.map((option) => (
             <MenuItem

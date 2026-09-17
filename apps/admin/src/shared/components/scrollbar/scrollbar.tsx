@@ -5,6 +5,7 @@ import SimpleBar from 'simplebar-react';
 import type { ScrollbarProps } from './types';
 
 import { scrollbarClasses } from './classes';
+import * as styles from './scrollbar.styles';
 
 // ----------------------------------------------------------------------
 
@@ -23,14 +24,12 @@ export function Scrollbar({
       clickOnTrack={false}
       fillContent={fillContent}
       className={mergeClasses([scrollbarClasses.root, className])}
-      sx={[
-        {
-          '& .simplebar-wrapper': slotProps?.wrapperSx as React.CSSProperties,
-          '& .simplebar-content-wrapper': slotProps?.contentWrapperSx as React.CSSProperties,
-          '& .simplebar-content': slotProps?.contentSx as React.CSSProperties,
-        },
-        ...(Array.isArray(sx) ? sx : [sx]),
-      ]}
+      sx={styles.scrollbarRootStyle(
+        slotProps?.wrapperSx as React.CSSProperties,
+        slotProps?.contentWrapperSx as React.CSSProperties,
+        slotProps?.contentSx as React.CSSProperties,
+        sx
+      )}
       {...other}
     >
       {children}

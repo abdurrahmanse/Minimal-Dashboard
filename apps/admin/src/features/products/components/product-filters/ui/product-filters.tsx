@@ -18,6 +18,8 @@ import { Scrollbar } from 'src/shared/components/scrollbar';
 
 import type { ProductFiltersProps } from '../types';
 
+import * as styles from './product-filters.styles';
+
 export function ProductFilters({
   filters,
   options,
@@ -110,7 +112,7 @@ export function ProductFilters({
 
   const renderRating = (
     <Stack spacing={1}>
-      <Typography variant="subtitle2" sx={{ mb: 2 }}>
+      <Typography variant="subtitle2" sx={styles.ratingTypographyStyle}>
         Rating
       </Typography>
 
@@ -118,21 +120,7 @@ export function ProductFilters({
         <Box
           key={option}
           onClick={() => onSetFilters({ rating: option })}
-          sx={{
-            mb: 1,
-            gap: 1,
-            ml: -1,
-            p: 0.5,
-            display: 'flex',
-            borderRadius: 1,
-            cursor: 'pointer',
-            typography: 'body2',
-            alignItems: 'center',
-            '&:hover': { opacity: 0.48 },
-            ...(filters.rating === option && {
-              bgcolor: 'action.selected',
-            }),
-          }}
+          sx={styles.ratingItemStyle(filters.rating === option)}
         >
           <Rating readOnly value={4 - index} /> & Up
         </Box>
@@ -161,20 +149,12 @@ export function ProductFilters({
         onClose={onCloseFilter}
         slotProps={{
           paper: {
-            sx: { width: 280, overflow: 'hidden' },
+            sx: styles.paperStyle,
           },
         }}
       >
-        <Box
-          sx={{
-            py: 2,
-            pl: 2.5,
-            pr: 1.5,
-            display: 'flex',
-            alignItems: 'center',
-          }}
-        >
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+        <Box sx={styles.headerBoxStyle}>
+          <Typography variant="h6" sx={styles.titleStyle}>
             Filters
           </Typography>
 
@@ -192,7 +172,7 @@ export function ProductFilters({
         <Divider />
 
         <Scrollbar>
-          <Stack spacing={3} sx={{ p: 3 }}>
+          <Stack spacing={3} sx={styles.stackStyle}>
             {renderGender}
             {renderCategory}
             {renderColors}

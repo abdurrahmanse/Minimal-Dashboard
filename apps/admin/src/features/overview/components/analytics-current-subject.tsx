@@ -7,6 +7,8 @@ import Divider from '@mui/material/Divider';
 import { useTheme } from '@mui/material/styles';
 import { Chart, ChartLegends, useChart } from 'src/shared/components/chart';
 
+import * as styles from './analytics-current-subject.styles';
+
 // ----------------------------------------------------------------------
 
 type Props = CardProps & {
@@ -52,20 +54,15 @@ export function AnalyticsCurrentSubject({ title, subheader, chart, sx, ...other 
         series={chart.series}
         options={chartOptions}
         slotProps={{ loading: { py: 2.5 } }}
-        sx={{
-          my: 1,
-          mx: 'auto',
-          width: 300,
-          height: 300,
-        }}
+        sx={styles.chartStyle}
       />
 
-      <Divider sx={{ borderStyle: 'dashed' }} />
+      <Divider sx={styles.dividerStyle} />
 
       <ChartLegends
         labels={chart.series.map((item) => item.name)}
         colors={chartOptions?.colors as string[]}
-        sx={{ p: 3, justifyContent: 'center' }}
+        sx={styles.chartLegendsStyle}
       />
     </Card>
   );

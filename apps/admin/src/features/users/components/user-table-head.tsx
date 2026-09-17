@@ -6,6 +6,7 @@ import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 
 import { visuallyHidden } from '../utils';
+import * as styles from './user-table-head.styles';
 
 // ----------------------------------------------------------------------
 
@@ -46,7 +47,7 @@ export function UserTableHead({
             key={headCell.id}
             align={headCell.align || 'left'}
             sortDirection={orderBy === headCell.id ? order : false}
-            sx={{ width: headCell.width, minWidth: headCell.minWidth }}
+            sx={styles.cellStyle(headCell.width, headCell.minWidth)}
           >
             <TableSortLabel
               hideSortIcon
@@ -56,7 +57,7 @@ export function UserTableHead({
             >
               {headCell.label}
               {orderBy === headCell.id ? (
-                <Box sx={{ ...visuallyHidden }}>
+                <Box sx={styles.sortBoxStyle}>
                   {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
                 </Box>
               ) : null}

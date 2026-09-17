@@ -1,0 +1,123 @@
+import Alert from '@mui/material/Alert';
+import Box from '@mui/material/Box';
+import { useTheme } from '@mui/material/styles';
+import { merge } from 'es-toolkit';
+import { useBoolean } from 'minimal-shared/hooks';
+import { _langs, _notifications } from 'src/shared/mocks';
+
+import type { HeaderSectionProps } from '../../core/header-section';
+import type { DashboardLayoutProps } from '../types';
+
+import { AccountPopover } from '../../components/account-popover';
+import { LanguagePopover } from '../../components/language-popover';
+import { MenuButton } from '../../components/menu-button';
+import { NotificationsPopover } from '../../components/notifications-popover';
+import { Searchbar } from '../../components/searchbar';
+import { ThemeToggle } from '../../components/theme-toggle';
+import { layoutClasses } from '../../core/classes';
+import { HeaderSection } from '../../core/header-section';
+import { LayoutSection } from '../../core/layout-section';
+import { MainSection } from '../../core/main-section';
+import { _account } from '../../nav-config-account';
+import { navData } from '../../nav-config-dashboard';
+import { _workspaces } from '../../nav-config-workspace';
+import { dashboardLayoutVars } from '../constants/css-vars';
+import * as styles from './dashboard-layout.styles';
+import { NavDesktop } from './nav-desktop';
+import { NavMobile } from './nav-mobile';
+
+export function DashboardLayout({
+  sx,
+  cssVars,
+  children,
+  slotProps,
+  layoutQuery = 'lg',
+}: DashboardLayoutProps) {
+  const theme = useTheme();
+
+  const { value: open, onFalse: onClose, onTrue: onOpen } = useBoolean();
+
+  const renderHeader = () => {
+    const headerSlotProps: HeaderSectionProps['slotProps'] = {
+      container: {
+        maxWidth: false,
+      },
+    };
+
+    const headerSlots: HeaderSectionProps['slots'] = {
+      topArea: (
+        <Alert severity="info" sx={styles.alertInfoStyle}>
+          This is an info Alert.
+        </Alert>
+      ),
+      leftArea: (
+        <>
+          {/** @slot Nav mobile */}
+          <MenuButton
+            onClick={onOpen}
+            sx={styles.menuButtonStyle(layoutQuery)}
+          />
+          <NavMobile data={navData} open={open} onClose={onClose} workspaces={_workspaces} />
+        </>
+      ),
+      rightArea: (
+        <Box sx={styles.boxHeaderRightStyle}>
+          {/** @slot Searchbar */}
+          <Searchbar />
+          {/** @slot Theme Toggle */}
+          <ThemeToggle />
+
+          {/** @slot Language popover */}
+          <LanguagePopover data={_langs} />
+
+          {/** @slot Notifications popover */}
+          <NotificationsPopover data={_notifications} />
+
+          {/** @slot Account drawer */}
+          <AccountPopover data={_account} />
+        </Box>
+      ),
+    };
+
+    return (
+      <HeaderSection
+        disableElevation
+        layoutQuery={layoutQuery}
+        {...slotProps?.header}
+        slots={{ ...headerSlots, ...slotProps?.header?.slots }}
+        slotProps={(merge(headerSlotProps, slotProps?.header?.slotProps ?? {}) as any)}
+        sx={slotProps?.header?.sx}
+      />
+    );
+  };
+
+  const renderFooter = () => null;
+
+  const renderMain = () => <MainSection {...slotProps?.main}>{children}</MainSection>;
+
+  return (
+    <LayoutSection
+      /** **************************************
+       * @Header
+       *************************************** */
+      headerSection={renderHeader()}
+      /** **************************************
+       * @Sidebar
+       *************************************** */
+      sidebarSection={
+        <NavDesktop data={navData} layoutQuery={layoutQuery} workspaces={_workspaces} />
+      }
+      /** **************************************
+       * @Footer
+       *************************************** */
+      footerSection={renderFooter()}
+      /** **************************************
+       * @Styles
+       *************************************** */
+      cssVars={{ ...dashboardLayoutVars(theme), ...cssVars }}
+      sx={styles.layoutSectionStyle(layoutQuery, sx)}
+    >
+      {renderMain()}
+    </LayoutSection>
+  );
+}

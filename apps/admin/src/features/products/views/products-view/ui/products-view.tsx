@@ -9,15 +9,15 @@ import { CartIcon } from '../../../components/product-cart-widget';
 import { ProductFilters } from '../../../components/product-filters';
 import { ProductItem } from '../../../components/product-item';
 import { ProductSort } from '../../../components/product-sort';
-
-import { useProductsView } from '../hooks/use-products-view';
 import {
-  GENDER_OPTIONS,
   CATEGORY_OPTIONS,
-  RATING_OPTIONS,
-  PRICE_OPTIONS,
   COLOR_OPTIONS,
+  GENDER_OPTIONS,
+  PRICE_OPTIONS,
+  RATING_OPTIONS,
 } from '../../../constants';
+import { useProductsView } from '../hooks/use-products-view';
+import * as styles from './products-view.styles';
 
 // ----------------------------------------------------------------------
 
@@ -38,26 +38,11 @@ export function ProductsView() {
     <DashboardContent>
       <CartIcon totalItems={8} />
 
-      <Typography variant="h4" sx={{ mb: 5 }}>
+      <Typography variant="h4" sx={styles.titleStyle}>
         Products
       </Typography>
-      <Box
-        sx={{
-          mb: 5,
-          display: 'flex',
-          alignItems: 'center',
-          flexWrap: 'wrap-reverse',
-          justifyContent: 'flex-end',
-        }}
-      >
-        <Box
-          sx={{
-            my: 1,
-            gap: 1,
-            flexShrink: 0,
-            display: 'flex',
-          }}
-        >
+      <Box sx={styles.containerBoxStyle}>
+        <Box sx={styles.filterSortBoxStyle}>
           <ProductFilters
             canReset={canReset}
             filters={filters}
@@ -96,7 +81,7 @@ export function ProductsView() {
         ))}
       </Grid>
 
-      <Pagination count={10} color="primary" sx={{ mt: 8, mx: 'auto' }} />
+      <Pagination count={10} color="primary" sx={styles.paginationStyle} />
     </DashboardContent>
   );
 }

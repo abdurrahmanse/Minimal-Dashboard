@@ -13,6 +13,8 @@ import { useCallback, useState } from 'react';
 import { usePathname, useRouter } from 'src/core/routes/hooks';
 import { _myAccount } from 'src/shared/mocks';
 
+import * as styles from './account-popover.styles';
+
 // ----------------------------------------------------------------------
 
 export type AccountPopoverProps = IconButtonProps & {
@@ -51,17 +53,10 @@ export function AccountPopover({ data = [], sx, ...other }: AccountPopoverProps)
     <>
       <IconButton
         onClick={handleOpenPopover}
-        sx={{
-          p: '2px',
-          width: 40,
-          height: 40,
-          background: (theme) =>
-            `conic-gradient(${theme.vars.palette.primary.light}, ${theme.vars.palette.warning.light}, ${theme.vars.palette.primary.light})`,
-          ...sx,
-        }}
+        sx={styles.iconButtonStyle(sx)}
         {...other}
       >
-        <Avatar src={_myAccount.photoURL} alt={_myAccount.displayName} sx={{ width: 1, height: 1 }}>
+        <Avatar src={_myAccount.photoURL} alt={_myAccount.displayName} sx={styles.avatarStyle}>
           {_myAccount.displayName.charAt(0).toUpperCase()}
         </Avatar>
       </IconButton>
@@ -72,44 +67,23 @@ export function AccountPopover({ data = [], sx, ...other }: AccountPopoverProps)
         onClose={handleClosePopover}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-        slotProps={{
-          paper: {
-            sx: { width: 200 },
-          },
-        }}
+        slotProps={styles.popoverPaperStyle}
       >
-        <Box sx={{ p: 2, pb: 1.5 }}>
+        <Box sx={styles.boxUserInfoStyle}>
           <Typography variant="subtitle2" noWrap>
             {_myAccount?.displayName}
           </Typography>
 
-          <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
+          <Typography variant="body2" sx={styles.typographyEmailStyle} noWrap>
             {_myAccount?.email}
           </Typography>
         </Box>
 
-        <Divider sx={{ borderStyle: 'dashed' }} />
+        <Divider sx={styles.dividerStyle} />
 
         <MenuList
           disablePadding
-          sx={{
-            p: 1,
-            gap: 0.5,
-            display: 'flex',
-            flexDirection: 'column',
-            [`& .${menuItemClasses.root}`]: {
-              px: 1,
-              gap: 2,
-              borderRadius: 0.75,
-              color: 'text.secondary',
-              '&:hover': { color: 'text.primary' },
-              [`&.${menuItemClasses.selected}`]: {
-                color: 'text.primary',
-                bgcolor: 'action.selected',
-                fontWeight: 'fontWeightSemiBold',
-              },
-            },
-          }}
+          sx={styles.menuListStyle}
         >
           {data.map((option) => (
             <MenuItem
@@ -123,9 +97,9 @@ export function AccountPopover({ data = [], sx, ...other }: AccountPopoverProps)
           ))}
         </MenuList>
 
-        <Divider sx={{ borderStyle: 'dashed' }} />
+        <Divider sx={styles.dividerStyle} />
 
-        <Box sx={{ p: 1 }}>
+        <Box sx={styles.boxLogoutStyle}>
           <Button fullWidth color="error" size="medium" variant="text">
             Logout
           </Button>

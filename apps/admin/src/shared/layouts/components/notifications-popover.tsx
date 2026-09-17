@@ -19,6 +19,8 @@ import { Iconify } from 'src/shared/components/iconify';
 import { Scrollbar } from 'src/shared/components/scrollbar';
 import { fToNow } from 'src/shared/utils/format-time';
 
+import * as styles from './notifications-popover.styles';
+
 // ----------------------------------------------------------------------
 
 type NotificationItemProps = {
@@ -78,29 +80,14 @@ export function NotificationsPopover({ data = [], sx, ...other }: NotificationsP
         onClose={handleClosePopover}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-        slotProps={{
-          paper: {
-            sx: {
-              width: 360,
-              overflow: 'hidden',
-              display: 'flex',
-              flexDirection: 'column',
-            },
-          },
-        }}
+        slotProps={styles.popoverPaperStyle}
       >
         <Box
-          sx={{
-            py: 2,
-            pl: 2.5,
-            pr: 1.5,
-            display: 'flex',
-            alignItems: 'center',
-          }}
+          sx={styles.boxHeaderStyle}
         >
-          <Box sx={{ flexGrow: 1 }}>
+          <Box sx={styles.boxFlexGrowStyle}>
             <Typography variant="subtitle1">Notifications</Typography>
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+            <Typography variant="body2" sx={styles.typographySubtitleStyle}>
               You have {totalUnRead} unread messages
             </Typography>
           </Box>
@@ -114,13 +101,13 @@ export function NotificationsPopover({ data = [], sx, ...other }: NotificationsP
           )}
         </Box>
 
-        <Divider sx={{ borderStyle: 'dashed' }} />
+        <Divider sx={styles.dividerStyle} />
 
-        <Scrollbar fillContent sx={{ minHeight: 240, maxHeight: { xs: 360, sm: 'none' } }}>
+        <Scrollbar fillContent sx={styles.scrollbarStyle}>
           <List
             disablePadding
             subheader={
-              <ListSubheader disableSticky sx={{ py: 1, px: 2.5, typography: 'overline' }}>
+              <ListSubheader disableSticky sx={styles.listSubheaderStyle}>
                 New
               </ListSubheader>
             }
@@ -133,7 +120,7 @@ export function NotificationsPopover({ data = [], sx, ...other }: NotificationsP
           <List
             disablePadding
             subheader={
-              <ListSubheader disableSticky sx={{ py: 1, px: 2.5, typography: 'overline' }}>
+              <ListSubheader disableSticky sx={styles.listSubheaderStyle}>
                 Before that
               </ListSubheader>
             }
@@ -144,9 +131,9 @@ export function NotificationsPopover({ data = [], sx, ...other }: NotificationsP
           </List>
         </Scrollbar>
 
-        <Divider sx={{ borderStyle: 'dashed' }} />
+        <Divider sx={styles.dividerStyle} />
 
-        <Box sx={{ p: 1 }}>
+        <Box sx={styles.boxViewAllStyle}>
           <Button fullWidth disableRipple color="inherit">
             View all
           </Button>
@@ -163,30 +150,17 @@ function NotificationItem({ notification }: { notification: NotificationItemProp
 
   return (
     <ListItemButton
-      sx={{
-        py: 1.5,
-        px: 2.5,
-        mt: '1px',
-        ...(notification.isUnRead && {
-          bgcolor: 'action.selected',
-        }),
-      }}
+      sx={styles.listItemButtonStyle(notification.isUnRead)}
     >
       <ListItemAvatar>
-        <Avatar sx={{ bgcolor: 'background.neutral' }}>{avatarUrl}</Avatar>
+        <Avatar sx={styles.avatarStyle}>{avatarUrl}</Avatar>
       </ListItemAvatar>
       <ListItemText
         primary={title}
         secondary={
           <Typography
             variant="caption"
-            sx={{
-              mt: 0.5,
-              gap: 0.5,
-              display: 'flex',
-              alignItems: 'center',
-              color: 'text.disabled',
-            }}
+            sx={styles.typographyTimeStyle}
           >
             <Iconify width={14} icon="solar:clock-circle-outline" />
             {fToNow(notification.postedAt)}
@@ -203,7 +177,7 @@ function renderContent(notification: NotificationItemProps) {
   const title = (
     <Typography variant="subtitle2">
       {notification.title}
-      <Typography component="span" variant="body2" sx={{ color: 'text.secondary' }}>
+      <Typography component="span" variant="body2" sx={styles.typographyDescStyle}>
         &nbsp; {notification.description}
       </Typography>
     </Typography>

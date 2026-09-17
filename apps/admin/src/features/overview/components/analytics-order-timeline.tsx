@@ -12,6 +12,8 @@ import CardHeader from '@mui/material/CardHeader';
 import Typography from '@mui/material/Typography';
 import { fDateTime } from 'src/shared/utils/format-time';
 
+import * as styles from './analytics-order-timeline.styles';
+
 // ----------------------------------------------------------------------
 
 type Props = CardProps & {
@@ -30,9 +32,7 @@ export function AnalyticsOrderTimeline({ title, subheader, list, sx, ...other }:
     <Card sx={sx} {...other}>
       <CardHeader title={title} subheader={subheader} />
 
-      <Timeline
-        sx={{ m: 0, p: 3, [`& .${timelineItemClasses.root}:before`]: { flex: 0, padding: 0 } }}
-      >
+      <Timeline sx={styles.timelineStyle}>
         {list.map((item, index) => (
           <Item key={item.id} item={item} lastItem={index === list.length - 1} />
         ))}
@@ -67,7 +67,7 @@ function Item({ item, lastItem, ...other }: ItemProps) {
       <TimelineContent>
         <Typography variant="subtitle2">{item.title}</Typography>
 
-        <Typography variant="caption" sx={{ color: 'text.disabled' }}>
+        <Typography variant="caption" sx={styles.timeStyle}>
           {fDateTime(item.time)}
         </Typography>
       </TimelineContent>

@@ -6,6 +6,8 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import { Iconify } from 'src/shared/components/iconify';
 
+import * as styles from './user-table-toolbar.styles';
+
 // ----------------------------------------------------------------------
 
 type UserTableToolbarProps = {
@@ -17,16 +19,7 @@ type UserTableToolbarProps = {
 export function UserTableToolbar({ numSelected, filterName, onFilterName }: UserTableToolbarProps) {
   return (
     <Toolbar
-      sx={{
-        height: 96,
-        display: 'flex',
-        justifyContent: 'space-between',
-        p: (theme) => theme.spacing(0, 1, 0, 3),
-        ...(numSelected > 0 && {
-          color: 'primary.main',
-          bgcolor: 'primary.lighter',
-        }),
-      }}
+      sx={styles.toolbarStyle(numSelected)}
     >
       {numSelected > 0 ? (
         <Typography component="div" variant="subtitle1">
@@ -40,10 +33,10 @@ export function UserTableToolbar({ numSelected, filterName, onFilterName }: User
           placeholder="Search user..."
           startAdornment={
             <InputAdornment position="start">
-              <Iconify width={20} icon="eva:search-fill" sx={{ color: 'text.disabled' }} />
+              <Iconify width={20} icon="eva:search-fill" sx={styles.iconStyle} />
             </InputAdornment>
           }
-          sx={{ maxWidth: 320 }}
+          sx={styles.inputStyle}
         />
       )}
 

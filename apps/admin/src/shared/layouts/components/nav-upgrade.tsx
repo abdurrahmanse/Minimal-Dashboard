@@ -4,42 +4,26 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
+import * as styles from './nav-upgrade.styles';
+
 // ----------------------------------------------------------------------
 
 export function NavUpgrade({ sx, ...other }: StackProps) {
   return (
     <Box
-      sx={[
-        {
-          mb: 4,
-          display: 'flex',
-          textAlign: 'center',
-          alignItems: 'center',
-          flexDirection: 'column',
-        },
-        ...(Array.isArray(sx) ? sx : [sx]),
-      ]}
+      sx={styles.boxContainerStyle(sx)}
       {...other}
     >
       <Typography
         variant="h6"
-        sx={[
-          (theme) => ({
-            background: `linear-gradient(to right, ${theme.vars.palette.secondary.main}, ${theme.vars.palette.warning.main})`,
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            textFillColor: 'transparent',
-            color: 'transparent',
-          }),
-        ]}
+        sx={styles.typographyTitleStyle}
       >
         More features?
       </Typography>
 
-      <Typography variant="body2" sx={{ color: 'text.secondary', mt: 0.5 }}>
+      <Typography variant="body2" sx={styles.typographySubtitleStyle}>
         {`From only `}
-        <Box component="strong" sx={{ color: 'text.primary' }}>
+        <Box component="strong" sx={styles.boxPriceStyle}>
           $69
         </Box>
       </Typography>
@@ -48,7 +32,7 @@ export function NavUpgrade({ sx, ...other }: StackProps) {
         component="img"
         alt="Minimal dashboard"
         src="/assets/illustrations/illustration-dashboard.webp"
-        sx={{ width: 200, my: 2 }}
+        sx={styles.boxImageStyle}
       />
 
       

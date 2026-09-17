@@ -7,6 +7,8 @@ import { Iconify } from 'src/shared/components/iconify';
 
 import type { IPostItem } from './post-item';
 
+import * as styles from './post-search.styles';
+
 // ----------------------------------------------------------------------
 
 type PostSearchProps = {
@@ -17,18 +19,12 @@ type PostSearchProps = {
 export function PostSearch({ posts, sx }: PostSearchProps) {
   return (
     <Autocomplete
-      sx={{ width: 280 }}
+      sx={styles.autocompleteStyle}
       autoHighlight
       popupIcon={null}
       slotProps={{
         paper: {
-          sx: {
-            width: 320,
-            [`& .${autocompleteClasses.option}`]: {
-              typography: 'body2',
-            },
-            ...sx,
-          },
+          sx: styles.paperStyle(sx),
         },
       }}
       options={posts}
@@ -45,7 +41,7 @@ export function PostSearch({ posts, sx }: PostSearchProps) {
                 <InputAdornment position="start">
                   <Iconify
                     icon="eva:search-fill"
-                    sx={{ ml: 1, width: 20, height: 20, color: 'text.disabled' }}
+                    sx={styles.iconStyle}
                   />
                 </InputAdornment>
               ),

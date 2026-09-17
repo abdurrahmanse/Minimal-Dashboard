@@ -9,6 +9,7 @@ import { useScrollOffsetTop } from 'minimal-shared/hooks';
 import { mergeClasses, varAlpha } from 'minimal-shared/utils';
 
 import { layoutClasses } from './classes';
+import * as styles from './header-section.styles';
 
 // ----------------------------------------------------------------------
 
@@ -49,14 +50,7 @@ export function HeaderSection({
       disableOffset={disableOffset}
       disableElevation={disableElevation}
       className={mergeClasses([layoutClasses.header, className])}
-      sx={[
-        (theme) => ({
-          ...(isOffset && {
-            '--color': `var(--offset-color, ${theme.vars.palette.text.primary})`,
-          }),
-        }),
-        ...(Array.isArray(sx) ? sx : [sx]),
-      ]}
+      sx={styles.headerRootStyle(isOffset, sx)}
       {...other}
     >
       {slots?.topArea}
@@ -83,57 +77,12 @@ type HeaderRootProps = Pick<HeaderSectionProps, 'disableOffset' | 'disableElevat
 const HeaderRoot = styled(AppBar, {
   shouldForwardProp: (prop: string) =>
     !['isOffset', 'disableOffset', 'disableElevation', 'sx'].includes(prop),
-})<HeaderRootProps>(({ isOffset, disableOffset, disableElevation, theme }) => {
-  const pauseZindex = { top: -1, bottom: -2 };
-
-  const pauseStyles: CSSObject = {
-    opacity: 0,
-    content: '""',
-    visibility: 'hidden',
-    position: 'absolute',
-    transition: theme.transitions.create(['opacity', 'visibility'], {
-      easing: theme.transitions.easing.easeInOut,
-      duration: theme.transitions.duration.shorter,
-    }),
-  };
-
-  const bgStyles: CSSObject = {
-    ...pauseStyles,
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    zIndex: pauseZindex.top,
-    backdropFilter: `blur(6px)`,
-    WebkitBackdropFilter: `blur(6px)`,
-    backgroundColor: varAlpha(theme.vars.palette.background.defaultChannel, 0.8),
-    ...(isOffset && {
-      opacity: 1,
-      visibility: 'visible',
-    }),
-  };
-
-  const shadowStyles: CSSObject = {
-    ...pauseStyles,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    height: 24,
-    margin: 'auto',
-    borderRadius: '50%',
-    width: `calc(100% - 48px)`,
-    zIndex: pauseZindex.bottom,
-    boxShadow: theme.vars.customShadows.z8,
-    ...(isOffset && { opacity: 0.48, visibility: 'visible' }),
-  };
-
-  return {
+})<HeaderRootProps>(({ isOffset, disableOffset, disableElevation, theme }) => ({
     boxShadow: 'none',
     zIndex: 'var(--layout-header-zIndex)',
-    ...(!disableOffset && { '&::before': bgStyles }),
-    ...(!disableElevation && { '&::after': shadowStyles }),
-  };
-});
+    ...(!disableOffset && { '&::before': styles.getBgStyles(theme, isOffset) }),
+    ...(!disableElevation && { '&::after': styles.getShadowStyles(theme, isOffset) }),
+  }));
 
 const HeaderContainer = styled(Container, {
   shouldForwardProp: (prop: string) => !['layoutQuery', 'sx'].includes(prop),

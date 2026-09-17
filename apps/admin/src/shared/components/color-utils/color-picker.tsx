@@ -7,6 +7,7 @@ import { useCallback } from 'react';
 
 import { Iconify } from '../iconify';
 import { colorPickerClasses } from './classes';
+import * as styles from './color-picker.styles';
 
 // ----------------------------------------------------------------------
 
@@ -64,16 +65,7 @@ export function ColorPicker({
     <ColorPickerRoot
       limit={limit}
       className={mergeClasses([colorPickerClasses.root, className])}
-      sx={[
-        {
-          '--item-size': `${size}px`,
-          '--item-radius':
-            (variant === 'circular' && '50%') ||
-            (variant === 'rounded' && 'calc(var(--item-size) / 6)') ||
-            '0px',
-        },
-        ...(Array.isArray(sx) ? sx : [sx]),
-      ]}
+      sx={styles.colorPickerRootStyle(size, variant, sx)}
       {...other}
     >
       {options.map((color) => {

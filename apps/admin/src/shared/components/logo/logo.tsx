@@ -7,6 +7,7 @@ import { useId } from 'react';
 import { RouterLink } from 'src/core/routes/components';
 
 import { logoClasses } from './classes';
+import * as styles from './logo.styles';
 
 // ----------------------------------------------------------------------
 
@@ -169,15 +170,7 @@ export function Logo({
       aria-label="Logo"
       underline="none"
       className={mergeClasses([logoClasses.root, className])}
-      sx={[
-        {
-          width: 40,
-          height: 40,
-          ...(!isSingle && { width: 102, height: 36 }),
-          ...(disabled && { pointerEvents: 'none' }),
-        },
-        ...(Array.isArray(sx) ? sx : [sx]),
-      ]}
+      sx={styles.logoRootStyle(isSingle, disabled, sx)}
       {...other}
     >
       {isSingle ? singleLogo : fullLogo}

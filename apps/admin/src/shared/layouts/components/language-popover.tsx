@@ -8,6 +8,8 @@ import Popover from '@mui/material/Popover';
 import { usePopover } from 'minimal-shared/hooks';
 import { useCallback, useState } from 'react';
 
+import * as styles from './language-popover.styles';
+
 // ----------------------------------------------------------------------
 
 export type LanguagePopoverProps = IconButtonProps & {
@@ -38,7 +40,7 @@ export function LanguagePopover({ data = [], sx, ...other }: LanguagePopoverProp
       component="img"
       alt={label}
       src={icon}
-      sx={{ width: 26, height: 20, borderRadius: 0.5, objectFit: 'cover' }}
+      sx={styles.flagStyle}
     />
   );
 
@@ -51,23 +53,7 @@ export function LanguagePopover({ data = [], sx, ...other }: LanguagePopoverProp
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
     >
       <MenuList
-        sx={{
-          p: 0.5,
-          gap: 0.5,
-          width: 160,
-          minHeight: 72,
-          display: 'flex',
-          flexDirection: 'column',
-          [`& .${menuItemClasses.root}`]: {
-            px: 1,
-            gap: 2,
-            borderRadius: 0.75,
-            [`&.${menuItemClasses.selected}`]: {
-              bgcolor: 'action.selected',
-              fontWeight: 'fontWeightSemiBold',
-            },
-          },
-        }}
+        sx={styles.menuListStyle}
       >
         {data?.map((option) => (
           <MenuItem
@@ -88,15 +74,7 @@ export function LanguagePopover({ data = [], sx, ...other }: LanguagePopoverProp
       <IconButton
         aria-label="Languages button"
         onClick={onOpen}
-        sx={[
-          (theme) => ({
-            p: 0,
-            width: 40,
-            height: 40,
-            ...(open && { bgcolor: theme.vars.palette.action.selected }),
-          }),
-          ...(Array.isArray(sx) ? sx : [sx]),
-        ]}
+        sx={styles.iconButtonStyle(open, sx)}
         {...other}
       >
         {renderFlag(currentLang?.label, currentLang?.icon)}

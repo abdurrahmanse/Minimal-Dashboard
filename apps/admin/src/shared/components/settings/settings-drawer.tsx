@@ -8,6 +8,8 @@ import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 import { Iconify } from 'src/shared/components/iconify';
 
+import * as styles from './settings-drawer.styles';
+
 export function SettingsDrawer() {
   const [open, setOpen] = useState(false);
   const { mode, setMode } = useColorScheme();
@@ -23,19 +25,7 @@ export function SettingsDrawer() {
           size="medium"
           aria-label="Settings"
           onClick={handleToggle}
-          sx={{
-            zIndex: 999,
-            right: 20,
-            bottom: 20,
-            width: 48,
-            height: 48,
-            position: 'fixed',
-            bgcolor: 'primary.main',
-            color: 'primary.contrastText',
-            '&:hover': {
-              bgcolor: 'primary.dark',
-            },
-          }}
+          sx={styles.fabStyle}
         >
           <Iconify width={24} icon="solar:settings-bold-duotone" />
         </Fab>
@@ -45,61 +35,31 @@ export function SettingsDrawer() {
         anchor="right"
         open={open}
         onClose={handleToggle}
-        slotProps={{
-          paper: {
-            sx: { width: 280, p: 3 },
-          },
-        }}
+        slotProps={styles.drawerPaperStyle}
       >
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 3 }}>
+        <Box sx={styles.headerBoxStyle}>
           <Typography variant="h6">Settings</Typography>
           <IconButton onClick={handleToggle}>
             <Iconify icon="mingcute:close-line" />
           </IconButton>
         </Box>
 
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+        <Box sx={styles.contentBoxStyle}>
           <Box>
-            <Typography variant="subtitle2" sx={{ mb: 1.5 }}>
+            <Typography variant="subtitle2" sx={styles.modeSubtitleStyle}>
               Mode
             </Typography>
-            <Box sx={{ display: 'flex', gap: 2 }}>
+            <Box sx={styles.modeBoxStyle}>
               <Box
                 onClick={() => setMode('light')}
-                sx={{
-                  flex: 1,
-                  height: 64,
-                  cursor: 'pointer',
-                  borderRadius: 1,
-                  border: (theme) => `solid 1px ${theme.vars.palette.divider}`,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  ...(mode === 'light' && {
-                    borderColor: 'primary.main',
-                    boxShadow: (theme) => `0 0 0 1px ${theme.vars.palette.primary.main}`,
-                  }),
-                }}
+                sx={styles.modeItemStyle(mode === 'light')}
               >
                 <Iconify icon="solar:sun-bold-duotone" width={28} />
               </Box>
 
               <Box
                 onClick={() => setMode('dark')}
-                sx={{
-                  flex: 1,
-                  height: 64,
-                  cursor: 'pointer',
-                  borderRadius: 1,
-                  border: (theme) => `solid 1px ${theme.vars.palette.divider}`,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  ...(mode === 'dark' && {
-                    borderColor: 'primary.main',
-                    boxShadow: (theme) => `0 0 0 1px ${theme.vars.palette.primary.main}`,
-                  }),
-                }}
+                sx={styles.modeItemStyle(mode === 'dark')}
               >
                 <Iconify icon="solar:moon-bold-duotone" width={28} />
               </Box>

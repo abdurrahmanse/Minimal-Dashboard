@@ -8,6 +8,8 @@ import { varAlpha } from 'minimal-shared/utils';
 import { Iconify } from 'src/shared/components/iconify';
 import { fShortenNumber } from 'src/shared/utils/format-number';
 
+import * as styles from './analytics-traffic-by-site.styles';
+
 // ----------------------------------------------------------------------
 
 type Props = CardProps & {
@@ -20,37 +22,22 @@ export function AnalyticsTrafficBySite({ title, subheader, list, sx, ...other }:
   return (
     <Card sx={sx} {...other}>
       <CardHeader title={title} subheader={subheader} />
-      <Box
-        sx={{
-          p: 3,
-          gap: 2,
-          display: 'grid',
-          gridTemplateColumns: 'repeat(2, 1fr)',
-        }}
-      >
+      <Box sx={styles.gridBoxStyle}>
         {list.map((site) => (
           <Box
             key={site.label}
-            sx={(theme) => ({
-              py: 2.5,
-              display: 'flex',
-              borderRadius: 1.5,
-              textAlign: 'center',
-              alignItems: 'center',
-              flexDirection: 'column',
-              border: `solid 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.12)}`,
-            })}
+            sx={styles.itemBoxStyle}
           >
             {site.value === 'twitter' && <Iconify width={32} icon="socials:twitter" />}
             {site.value === 'facebook' && <Iconify width={32} icon="socials:facebook" />}
             {site.value === 'google' && <Iconify width={32} icon="socials:google" />}
             {site.value === 'linkedin' && <Iconify width={32} icon="socials:linkedin" />}
 
-            <Typography variant="h6" sx={{ mt: 1 }}>
+            <Typography variant="h6" sx={styles.itemTotalStyle}>
               {fShortenNumber(site.total)}
             </Typography>
 
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+            <Typography variant="body2" sx={styles.itemLabelStyle}>
               {site.label}
             </Typography>
           </Box>

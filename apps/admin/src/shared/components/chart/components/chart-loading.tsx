@@ -7,6 +7,7 @@ import { mergeClasses } from 'minimal-shared/utils';
 import type { ChartProps } from '../types';
 
 import { chartClasses } from '../classes';
+import * as styles from './chart-loading.styles';
 
 // ----------------------------------------------------------------------
 
@@ -18,32 +19,12 @@ export function ChartLoading({ sx, className, type, ...other }: ChartLoadingProp
   return (
     <Box
       className={mergeClasses([chartClasses.loading, className])}
-      sx={[
-        () => ({
-          top: 0,
-          left: 0,
-          width: 1,
-          zIndex: 9,
-          height: 1,
-          p: 'inherit',
-          overflow: 'hidden',
-          alignItems: 'center',
-          position: 'absolute',
-          borderRadius: 'inherit',
-          justifyContent: 'center',
-        }),
-        ...(Array.isArray(sx) ? sx : [sx]),
-      ]}
+      sx={styles.boxStyle(sx)}
       {...other}
     >
       <Skeleton
         variant="circular"
-        sx={{
-          width: 1,
-          height: 1,
-          borderRadius: 'inherit',
-          ...(circularTypes.includes(type) && { borderRadius: '50%' }),
-        }}
+        sx={styles.skeletonStyle(circularTypes as string[], type as string)}
       />
     </Box>
   );

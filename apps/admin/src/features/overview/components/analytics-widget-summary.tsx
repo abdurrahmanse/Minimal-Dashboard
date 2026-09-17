@@ -11,6 +11,8 @@ import { Iconify } from 'src/shared/components/iconify';
 import { SvgColor } from 'src/shared/components/svg-color';
 import { fNumber, fPercent, fShortenNumber } from 'src/shared/utils/format-number';
 
+import * as styles from './analytics-widget-summary.styles';
+
 // ----------------------------------------------------------------------
 
 type Props = CardProps & {
@@ -62,18 +64,9 @@ export function AnalyticsWidgetSummary({
   });
 
   const renderTrending = () => (
-    <Box
-      sx={{
-        top: 16,
-        gap: 0.5,
-        right: 16,
-        display: 'flex',
-        position: 'absolute',
-        alignItems: 'center',
-      }}
-    >
+    <Box sx={styles.trendingBoxStyle}>
       <Iconify width={20} icon={percent < 0 ? 'eva:trending-down-fill' : 'eva:trending-up-fill'} />
-      <Box component="span" sx={{ typography: 'subtitle2' }}>
+      <Box component="span" sx={styles.trendingTextStyle}>
         {percent > 0 && '+'}
         {fPercent(percent)}
       </Box>
@@ -82,57 +75,31 @@ export function AnalyticsWidgetSummary({
 
   return (
     <Card
-      sx={[
-        () => ({
-          p: 3,
-          boxShadow: 'none',
-          position: 'relative',
-          color: `${color}.darker`,
-          backgroundColor: 'common.white',
-          backgroundImage: `linear-gradient(135deg, ${varAlpha(theme.vars.palette[color].lighterChannel, 0.48)}, ${varAlpha(theme.vars.palette[color].lightChannel, 0.48)})`,
-        }),
-        ...(Array.isArray(sx) ? sx : [sx]),
-      ]}
+      sx={styles.cardStyle(color, sx)}
       {...other}
     >
-      <Box sx={{ width: 48, height: 48, mb: 3 }}>{icon}</Box>
+      <Box sx={styles.iconBoxStyle}>{icon}</Box>
 
       {renderTrending()}
 
-      <Box
-        sx={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'flex-end',
-          justifyContent: 'flex-end',
-        }}
-      >
-        <Box sx={{ flexGrow: 1, minWidth: 112 }}>
-          <Box sx={{ mb: 1, typography: 'subtitle2' }}>{title}</Box>
+      <Box sx={styles.contentBoxStyle}>
+        <Box sx={styles.textBoxStyle}>
+          <Box sx={styles.titleStyle}>{title}</Box>
 
-          <Box sx={{ typography: 'h4' }}>{fShortenNumber(total)}</Box>
+          <Box sx={styles.totalStyle}>{fShortenNumber(total)}</Box>
         </Box>
 
         <Chart
           type="line"
           series={[{ data: chart.series }]}
           options={chartOptions}
-          sx={{ width: 84, height: 56 }}
+          sx={styles.chartStyle}
         />
       </Box>
 
       <SvgColor
         src="/assets/background/shape-square.svg"
-        sx={{
-          top: 0,
-          left: -20,
-          width: 240,
-          zIndex: -1,
-          height: 240,
-          opacity: 0.24,
-          position: 'absolute',
-          color: `${color}.main`,
-        }}
+        sx={styles.bgShapeStyle(color)}
       />
     </Card>
   );

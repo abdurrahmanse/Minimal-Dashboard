@@ -4,6 +4,7 @@ import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 
 // ----------------------------------------------------------------------
+import * as styles from './table-empty-rows.styles';
 
 type TableEmptyRowsProps = TableRowProps & {
   emptyRows: number;
@@ -17,7 +18,7 @@ export function TableEmptyRows({ emptyRows, height, sx, ...other }: TableEmptyRo
 
   return (
     <TableRow
-      sx={[height && { height: height * emptyRows }, ...(Array.isArray(sx) ? sx : [sx])]}
+      sx={styles.rowStyle(height, emptyRows, sx)}
       {...other}
     >
       <TableCell colSpan={9} />

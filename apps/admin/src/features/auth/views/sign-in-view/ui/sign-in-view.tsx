@@ -10,30 +10,25 @@ import { RouterLink } from 'src/core/routes/components';
 import { Iconify } from 'src/shared/components/iconify';
 
 import { useSignIn } from '../hooks/use-sign-in';
+import * as styles from './sign-in-view.styles';
 
 export function SignInView() {
   const { showPassword, setShowPassword, handleSignIn } = useSignIn();
 
   const renderForm = (
-    <Box
-      sx={{
-        display: 'flex',
-        alignItems: 'flex-end',
-        flexDirection: 'column',
-      }}
-    >
+    <Box sx={styles.formBoxStyle}>
       <TextField
         fullWidth
         name="email"
         label="Email address"
         defaultValue="hello@gmail.com"
-        sx={{ mb: 3 }}
+        sx={styles.textFieldStyle}
         slotProps={{
           inputLabel: { shrink: true },
         }}
       />
 
-      <Link component={RouterLink} href="/forgot-password" variant="body2" color="inherit" sx={{ mb: 1.5 }}>
+      <Link component={RouterLink} href="/forgot-password" variant="body2" color="inherit" sx={styles.forgotPasswordLinkStyle}>
         Forgot password?
       </Link>
 
@@ -55,7 +50,7 @@ export function SignInView() {
             ),
           },
         }}
-        sx={{ mb: 3 }}
+        sx={styles.textFieldStyle}
       />
 
       <Button
@@ -73,44 +68,28 @@ export function SignInView() {
 
   return (
     <>
-      <Box
-        sx={{
-          gap: 1.5,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          mb: 5,
-        }}
-      >
+      <Box sx={styles.headerBoxStyle}>
         <Typography variant="h5">Sign in</Typography>
         <Typography
           variant="body2"
-          sx={{
-            color: 'text.secondary',
-          }}
+          sx={styles.headerSubtitleStyle}
         >
           Don’t have an account?
-          <Link component={RouterLink} href="/sign-up" variant="subtitle2" sx={{ ml: 0.5 }}>
+          <Link component={RouterLink} href="/sign-up" variant="subtitle2" sx={styles.headerLinkStyle}>
             Get started
           </Link>
         </Typography>
       </Box>
       {renderForm}
-      <Divider sx={{ my: 3, '&::before, &::after': { borderTopStyle: 'dashed' } }}>
+      <Divider sx={styles.dividerStyle}>
         <Typography
           variant="overline"
-          sx={{ color: 'text.secondary', fontWeight: 'fontWeightMedium' }}
+          sx={styles.dividerTextStyle}
         >
           OR
         </Typography>
       </Divider>
-      <Box
-        sx={{
-          gap: 1,
-          display: 'flex',
-          justifyContent: 'center',
-        }}
-      >
+      <Box sx={styles.socialsBoxStyle}>
         <IconButton color="inherit">
           <Iconify width={22} icon="socials:google" />
         </IconButton>

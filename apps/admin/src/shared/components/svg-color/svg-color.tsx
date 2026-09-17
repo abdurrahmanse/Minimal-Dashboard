@@ -4,6 +4,7 @@ import { mergeClasses } from 'minimal-shared/utils';
 import type { SvgColorProps } from './types';
 
 import { svgColorClasses } from './classes';
+import * as styles from './svg-color.styles';
 
 // ----------------------------------------------------------------------
 
@@ -11,13 +12,7 @@ export function SvgColor({ src, className, sx, ...other }: SvgColorProps) {
   return (
     <SvgRoot
       className={mergeClasses([svgColorClasses.root, className])}
-      sx={[
-        {
-          mask: `url(${src}) no-repeat center / contain`,
-          WebkitMask: `url(${src}) no-repeat center / contain`,
-        },
-        ...(Array.isArray(sx) ? sx : [sx]),
-      ]}
+      sx={styles.svgRootStyle(src, sx)}
       {...other}
     />
   );

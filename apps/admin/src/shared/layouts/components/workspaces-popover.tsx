@@ -10,6 +10,8 @@ import { useCallback, useState } from 'react';
 import { Iconify } from 'src/shared/components/iconify';
 import { Label } from 'src/shared/components/label';
 
+import * as styles from './workspaces-popover.styles';
+
 // ----------------------------------------------------------------------
 
 export type WorkspacesPopoverProps = ButtonBaseProps & {
@@ -43,7 +45,7 @@ export function WorkspacesPopover({ data = [], sx, ...other }: WorkspacesPopover
   );
 
   const renderAvatar = (alt: string, src: string) => (
-    <Box component="img" alt={alt} src={src} sx={{ width: 24, height: 24, borderRadius: '50%' }} />
+    <Box component="img" alt={alt} src={src} sx={styles.avatarStyle} />
   );
 
   const renderLabel = (plan: string) => (
@@ -55,58 +57,25 @@ export function WorkspacesPopover({ data = [], sx, ...other }: WorkspacesPopover
       <ButtonBase
         disableRipple
         onClick={handleOpenPopover}
-        sx={{
-          pl: 2,
-          py: 3,
-          gap: 1.5,
-          pr: 1.5,
-          width: 1,
-          borderRadius: 1.5,
-          textAlign: 'left',
-          justifyContent: 'flex-start',
-          bgcolor: (theme) => varAlpha(theme.vars.palette.grey['500Channel'], 0.08),
-          ...sx,
-        }}
+        sx={styles.buttonBaseStyle(sx)}
         {...other}
       >
         {renderAvatar(workspace?.name, workspace?.logo)}
 
         <Box
-          sx={{
-            gap: 1,
-            flexGrow: 1,
-            display: 'flex',
-            alignItems: 'center',
-            typography: 'body2',
-            fontWeight: 'fontWeightSemiBold',
-          }}
+          sx={styles.boxContainerStyle}
         >
           {workspace?.name}
           {renderLabel(workspace?.plan)}
         </Box>
 
-        <Iconify width={16} icon="carbon:chevron-sort" sx={{ color: 'text.disabled' }} />
+        <Iconify width={16} icon="carbon:chevron-sort" sx={styles.chevronIconStyle} />
       </ButtonBase>
 
       <Popover open={!!openPopover} anchorEl={openPopover} onClose={handleClosePopover}>
         <MenuList
           disablePadding
-          sx={{
-            p: 0.5,
-            gap: 0.5,
-            width: 260,
-            display: 'flex',
-            flexDirection: 'column',
-            [`& .${menuItemClasses.root}`]: {
-              p: 1.5,
-              gap: 1.5,
-              borderRadius: 0.75,
-              [`&.${menuItemClasses.selected}`]: {
-                bgcolor: 'action.selected',
-                fontWeight: 'fontWeightSemiBold',
-              },
-            },
-          }}
+          sx={styles.menuListStyle}
         >
           {data.map((option) => (
             <MenuItem
@@ -116,7 +85,7 @@ export function WorkspacesPopover({ data = [], sx, ...other }: WorkspacesPopover
             >
               {renderAvatar(option.name, option.logo)}
 
-              <Box component="span" sx={{ flexGrow: 1 }}>
+              <Box component="span" sx={styles.menuItemSpanStyle}>
                 {option.name}
               </Box>
 

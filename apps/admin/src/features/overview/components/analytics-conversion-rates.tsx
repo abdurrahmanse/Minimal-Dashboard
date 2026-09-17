@@ -7,6 +7,8 @@ import { alpha as hexAlpha, useTheme } from '@mui/material/styles';
 import { Chart, useChart } from 'src/shared/components/chart';
 import { fNumber } from 'src/shared/utils/format-number';
 
+import * as styles from './analytics-conversion-rates.styles';
+
 // ----------------------------------------------------------------------
 
 type Props = CardProps & {
@@ -68,12 +70,7 @@ export function AnalyticsConversionRates({ title, subheader, chart, sx, ...other
         series={chart.series}
         options={chartOptions}
         slotProps={{ loading: { p: 2.5 } }}
-        sx={{
-          pl: 1,
-          py: 2.5,
-          pr: 2.5,
-          height: 360,
-        }}
+        sx={styles.chartStyle}
       />
     </Card>
   );

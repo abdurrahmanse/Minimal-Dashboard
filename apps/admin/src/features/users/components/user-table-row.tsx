@@ -14,6 +14,8 @@ import { Label } from 'src/shared/components/label';
 // ----------------------------------------------------------------------
 import type { UserProps } from '../types';
 
+import * as styles from './user-table-row.styles';
+
 type UserTableRowProps = {
   row: UserProps;
   selected: boolean;
@@ -40,11 +42,7 @@ export function UserTableRow({ row, selected, onSelectRow }: UserTableRowProps) 
 
         <TableCell component="th" scope="row">
           <Box
-            sx={{
-              gap: 2,
-              display: 'flex',
-              alignItems: 'center',
-            }}
+            sx={styles.nameBoxStyle}
           >
             <Avatar alt={row.name} src={row.avatarUrl} />
             {row.name}
@@ -57,7 +55,7 @@ export function UserTableRow({ row, selected, onSelectRow }: UserTableRowProps) 
 
         <TableCell align="center">
           {row.isVerified ? (
-            <Iconify width={22} icon="solar:check-circle-bold" sx={{ color: 'success.main' }} />
+            <Iconify width={22} icon="solar:check-circle-bold" sx={styles.checkIconStyle} />
           ) : (
             '-'
           )}
@@ -83,26 +81,14 @@ export function UserTableRow({ row, selected, onSelectRow }: UserTableRowProps) 
       >
         <MenuList
           disablePadding
-          sx={{
-            p: 0.5,
-            gap: 0.5,
-            width: 140,
-            display: 'flex',
-            flexDirection: 'column',
-            [`& .${menuItemClasses.root}`]: {
-              px: 1,
-              gap: 2,
-              borderRadius: 0.75,
-              [`&.${menuItemClasses.selected}`]: { bgcolor: 'action.selected' },
-            },
-          }}
+          sx={styles.menuListStyle}
         >
           <MenuItem onClick={handleClosePopover}>
             <Iconify icon="solar:pen-bold" />
             Edit
           </MenuItem>
 
-          <MenuItem onClick={handleClosePopover} sx={{ color: 'error.main' }}>
+          <MenuItem onClick={handleClosePopover} sx={styles.deleteMenuItemStyle}>
             <Iconify icon="solar:trash-bin-trash-bold" />
             Delete
           </MenuItem>

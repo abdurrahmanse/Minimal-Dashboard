@@ -12,6 +12,8 @@ import { varAlpha } from 'minimal-shared/utils';
 import { useCallback, useState } from 'react';
 import { Iconify } from 'src/shared/components/iconify';
 
+import * as styles from './searchbar.styles';
+
 // ----------------------------------------------------------------------
 
 export function Searchbar({ sx, ...other }: BoxProps) {
@@ -38,25 +40,7 @@ export function Searchbar({ sx, ...other }: BoxProps) {
 
         <Slide direction="down" in={open} mountOnEnter unmountOnExit>
           <Box
-            sx={{
-              top: 0,
-              left: 0,
-              zIndex: 99,
-              width: '100%',
-              display: 'flex',
-              position: 'absolute',
-              alignItems: 'center',
-              px: { xs: 3, md: 5 },
-              boxShadow: theme.vars.customShadows.z8,
-              height: {
-                xs: 'var(--layout-header-mobile-height)',
-                md: 'var(--layout-header-desktop-height)',
-              },
-              backdropFilter: `blur(6px)`,
-              WebkitBackdropFilter: `blur(6px)`,
-              backgroundColor: varAlpha(theme.vars.palette.background.defaultChannel, 0.8),
-              ...sx,
-            }}
+            sx={styles.boxContainerStyle(sx)}
             {...other}
           >
             <Input
@@ -66,10 +50,10 @@ export function Searchbar({ sx, ...other }: BoxProps) {
               placeholder="Search…"
               startAdornment={
                 <InputAdornment position="start">
-                  <Iconify width={20} icon="eva:search-fill" sx={{ color: 'text.disabled' }} />
+                  <Iconify width={20} icon="eva:search-fill" sx={styles.searchIconStyle} />
                 </InputAdornment>
               }
-              sx={{ fontWeight: 'fontWeightBold' }}
+              sx={styles.inputStyle}
             />
             <Button variant="contained" onClick={handleClose}>
               Search

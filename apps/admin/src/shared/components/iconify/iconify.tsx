@@ -8,6 +8,7 @@ import { useId } from 'react';
 import type { IconifyName } from './register-icons';
 
 import { iconifyClasses } from './classes';
+import * as styles from './iconify.styles';
 import { allIconNames, registerIcons } from './register-icons';
 
 // ----------------------------------------------------------------------
@@ -38,15 +39,7 @@ export function Iconify({ className, icon, width = 20, height, sx, ...other }: I
       id={id}
       icon={icon}
       className={mergeClasses([iconifyClasses.root, className])}
-      sx={[
-        {
-          width,
-          flexShrink: 0,
-          height: height ?? width,
-          display: 'inline-flex',
-        },
-        ...(Array.isArray(sx) ? sx : [sx]),
-      ]}
+      sx={styles.iconRootStyle(width, height, sx)}
       {...other}
     />
   );

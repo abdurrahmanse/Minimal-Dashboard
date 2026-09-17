@@ -2,6 +2,7 @@ import { styled } from '@mui/material/styles';
 import { mergeClasses } from 'minimal-shared/utils';
 
 import { chartClasses } from '../classes';
+import * as styles from './chart-legends.styles';
 
 // ----------------------------------------------------------------------
 
@@ -38,15 +39,7 @@ export function ChartLegends({
         <ItemWrap
           key={series}
           className={chartClasses.legends.item.wrap}
-          sx={[
-            {
-              '--icon-color': colors[index],
-              ...slotProps?.wrapper,
-            },
-            ...(Array.isArray(slotProps?.wrapper?.sx)
-              ? (slotProps?.wrapper?.sx ?? [])
-              : [slotProps?.wrapper?.sx]),
-          ]}
+          sx={styles.itemWrapStyle(colors[index], slotProps?.wrapper, slotProps?.wrapper?.sx)}
         >
           <ItemRoot className={chartClasses.legends.item.root} {...slotProps?.root}>
             {icons.length ? (

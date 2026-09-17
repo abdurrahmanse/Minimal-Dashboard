@@ -2,6 +2,7 @@ import { styled } from '@mui/material/styles';
 import { mergeClasses, varAlpha } from 'minimal-shared/utils';
 
 import { colorPreviewClasses } from './classes';
+import * as styles from './color-preview.styles';
 
 // ----------------------------------------------------------------------
 
@@ -42,16 +43,7 @@ export function ColorPreview({
           key={color + index}
           className={colorPreviewClasses.item}
           {...slotProps?.item}
-          sx={[
-            {
-              '--item-color': color,
-              '--item-size': `${size}px`,
-              '--item-gap': `${-gap}px`,
-            },
-            ...(Array.isArray(slotProps?.item?.sx)
-              ? (slotProps.item?.sx ?? [])
-              : [slotProps?.item?.sx]),
-          ]}
+          sx={styles.itemRootStyle(color, size, gap, slotProps?.item?.sx)}
         />
       ))}
 

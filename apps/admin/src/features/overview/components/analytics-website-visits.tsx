@@ -6,6 +6,8 @@ import CardHeader from '@mui/material/CardHeader';
 import { alpha as hexAlpha, useTheme } from '@mui/material/styles';
 import { Chart, useChart } from 'src/shared/components/chart';
 
+import * as styles from './analytics-website-visits.styles';
+
 // ----------------------------------------------------------------------
 
 type Props = CardProps & {
@@ -48,12 +50,7 @@ export function AnalyticsWebsiteVisits({ title, subheader, chart, sx, ...other }
         series={chart.series}
         options={chartOptions}
         slotProps={{ loading: { p: 2.5 } }}
-        sx={{
-          pl: 1,
-          py: 2.5,
-          pr: 2.5,
-          height: 364,
-        }}
+        sx={styles.chartStyle}
       />
     </Card>
   );

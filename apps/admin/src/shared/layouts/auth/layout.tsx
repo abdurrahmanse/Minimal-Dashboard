@@ -16,6 +16,7 @@ import { HeaderSection } from '../core/header-section';
 import { LayoutSection } from '../core/layout-section';
 import { MainSection } from '../core/main-section';
 import { AuthContent } from './content';
+import * as styles from './layout.styles';
 
 // ----------------------------------------------------------------------
 
@@ -42,7 +43,7 @@ export function AuthLayout({
 
     const headerSlots: HeaderSectionProps['slots'] = {
       topArea: (
-        <Alert severity="info" sx={{ display: 'none', borderRadius: 0 }}>
+        <Alert severity="info" sx={styles.alertInfoStyle}>
           This is an info Alert.
         </Alert>
       ),
@@ -53,9 +54,9 @@ export function AuthLayout({
         </>
       ),
       rightArea: (
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 1, sm: 1.5 } }}>
+        <Box sx={styles.boxRightAreaStyle}>
           {/** @slot Help link */}
-          <Link href="#" component={RouterLink} color="inherit" sx={{ typography: 'subtitle2' }}>
+          <Link href="#" component={RouterLink} color="inherit" sx={styles.linkHelpStyle}>
             Need help?
           </Link>
         </Box>
@@ -69,12 +70,7 @@ export function AuthLayout({
         {...slotProps?.header}
         slots={{ ...headerSlots, ...slotProps?.header?.slots }}
         slotProps={(merge(headerSlotProps, slotProps?.header?.slotProps ?? {}) as any)}
-        sx={[
-          { position: { [layoutQuery]: 'fixed' } },
-          ...(Array.isArray(slotProps?.header?.sx)
-            ? (slotProps?.header?.sx ?? [])
-            : [slotProps?.header?.sx]),
-        ]}
+        sx={styles.headerSectionStyle(layoutQuery, slotProps?.header?.sx)}
       />
     );
   };
@@ -84,19 +80,7 @@ export function AuthLayout({
   const renderMain = () => (
     <MainSection
       {...slotProps?.main}
-      sx={[
-        (theme) => ({
-          alignItems: 'center',
-          p: theme.spacing(3, 2, 10, 2),
-          [theme.breakpoints.up(layoutQuery)]: {
-            justifyContent: 'center',
-            p: theme.spacing(10, 0, 10, 0),
-          },
-        }),
-        ...(Array.isArray(slotProps?.main?.sx)
-          ? (slotProps?.main?.sx ?? [])
-          : [slotProps?.main?.sx]),
-      ]}
+      sx={styles.mainSectionStyle(layoutQuery, slotProps?.main?.sx)}
     >
       <AuthContent {...slotProps?.content}>{children}</AuthContent>
     </MainSection>
@@ -116,30 +100,11 @@ export function AuthLayout({
        * @Styles
        *************************************** */
       cssVars={{ '--layout-auth-content-width': '420px', ...cssVars }}
-      sx={[
-        (theme) => ({
-          position: 'relative',
-          '&::before': backgroundStyles(),
-        }),
-        ...(Array.isArray(sx) ? sx : [sx]),
-      ]}
+      sx={styles.layoutSectionStyle(sx)}
     >
       {renderMain()}
     </LayoutSection>
   );
 }
 
-// ----------------------------------------------------------------------
 
-const backgroundStyles = (): CSSObject => ({
-  zIndex: 1,
-  opacity: 0.24,
-  width: '100%',
-  height: '100%',
-  content: "''",
-  position: 'absolute',
-  backgroundSize: 'cover',
-  backgroundRepeat: 'no-repeat',
-  backgroundPosition: 'center center',
-  backgroundImage: 'url(/assets/background/overlay.jpg)',
-});

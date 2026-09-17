@@ -12,6 +12,8 @@ import { SvgColor } from 'src/shared/components/svg-color';
 import { fShortenNumber } from 'src/shared/utils/format-number';
 import { fDate } from 'src/shared/utils/format-time';
 
+import * as styles from './post-item.styles';
+
 // ----------------------------------------------------------------------
 
 export type IPostItem = {
@@ -45,15 +47,7 @@ export function PostItem({
     <Avatar
       alt={post.author.name}
       src={post.author.avatarUrl}
-      sx={{
-        left: 24,
-        zIndex: 9,
-        bottom: -24,
-        position: 'absolute',
-        ...((latestPostLarge || latestPost) && {
-          top: 24,
-        }),
-      }}
+      sx={styles.avatarStyle(latestPostLarge, latestPost)}
     />
   );
 
@@ -62,17 +56,7 @@ export function PostItem({
       color="inherit"
       variant="subtitle2"
       underline="hover"
-      sx={{
-        height: 44,
-        overflow: 'hidden',
-        WebkitLineClamp: 2,
-        display: '-webkit-box',
-        WebkitBoxOrient: 'vertical',
-        ...(latestPostLarge && { typography: 'h5', height: 60 }),
-        ...((latestPostLarge || latestPost) && {
-          color: 'common.white',
-        }),
-      }}
+      sx={styles.titleStyle(latestPostLarge, latestPost)}
     >
       {post.title}
     </Link>
@@ -80,14 +64,7 @@ export function PostItem({
 
   const renderInfo = (
     <Box
-      sx={{
-        mt: 3,
-        gap: 1.5,
-        display: 'flex',
-        flexWrap: 'wrap',
-        color: 'text.disabled',
-        justifyContent: 'flex-end',
-      }}
+      sx={styles.infoBoxStyle}
     >
       {[
         { number: post.totalComments, icon: 'solar:chat-round-dots-bold' },
@@ -96,15 +73,9 @@ export function PostItem({
       ].map((info, _index) => (
         <Box
           key={_index}
-          sx={{
-            display: 'flex',
-            ...((latestPostLarge || latestPost) && {
-              opacity: 0.64,
-              color: 'common.white',
-            }),
-          }}
+          sx={styles.infoItemStyle(latestPostLarge, latestPost)}
         >
-          <Iconify width={16} icon={info.icon as IconifyName} sx={{ mr: 0.5 }} />
+          <Iconify width={16} icon={info.icon as IconifyName} sx={styles.iconStyle} />
           <Typography variant="caption">{fShortenNumber(info.number)}</Typography>
         </Box>
       ))}
@@ -116,13 +87,7 @@ export function PostItem({
       component="img"
       alt={post.title}
       src={post.coverUrl}
-      sx={{
-        top: 0,
-        width: 1,
-        height: 1,
-        objectFit: 'cover',
-        position: 'absolute',
-      }}
+      sx={styles.coverStyle}
     />
   );
 
@@ -130,14 +95,7 @@ export function PostItem({
     <Typography
       variant="caption"
       component="div"
-      sx={{
-        mb: 1,
-        color: 'text.disabled',
-        ...((latestPostLarge || latestPost) && {
-          opacity: 0.48,
-          color: 'common.white',
-        }),
-      }}
+      sx={styles.dateStyle(latestPostLarge, latestPost)}
     >
       {fDate(post.postedAt)}
     </Typography>
@@ -146,43 +104,14 @@ export function PostItem({
   const renderShape = (
     <SvgColor
       src="/assets/icons/shape-avatar.svg"
-      sx={{
-        left: 0,
-        width: 88,
-        zIndex: 9,
-        height: 36,
-        bottom: -16,
-        position: 'absolute',
-        color: 'background.paper',
-        ...((latestPostLarge || latestPost) && { display: 'none' }),
-      }}
+      sx={styles.shapeStyle(latestPostLarge, latestPost)}
     />
   );
 
   return (
     <Card sx={sx} {...other}>
       <Box
-        sx={(theme) => ({
-          position: 'relative',
-          pt: 'calc(100% * 3 / 4)',
-          ...((latestPostLarge || latestPost) && {
-            pt: 'calc(100% * 4 / 3)',
-            '&:after': {
-              top: 0,
-              content: "''",
-              width: '100%',
-              height: '100%',
-              position: 'absolute',
-              bgcolor: varAlpha(theme.palette.grey['900Channel'], 0.72),
-            },
-          }),
-          ...(latestPostLarge && {
-            pt: {
-              xs: 'calc(100% * 4 / 3)',
-              sm: 'calc(100% * 3 / 4.66)',
-            },
-          }),
-        })}
+        sx={styles.containerBoxStyle(latestPostLarge, latestPost)}
       >
         {renderShape}
         {renderAvatar}
@@ -190,14 +119,7 @@ export function PostItem({
       </Box>
 
       <Box
-        sx={(theme) => ({
-          p: theme.spacing(6, 3, 3, 3),
-          ...((latestPostLarge || latestPost) && {
-            width: 1,
-            bottom: 0,
-            position: 'absolute',
-          }),
-        })}
+        sx={styles.contentBoxStyle(latestPostLarge, latestPost)}
       >
         {renderDate}
         {renderTitle}
