@@ -21,12 +21,14 @@ const MuiButton: Components<Theme>['MuiButton'] = {
     disableElevation: true,
   },
   styleOverrides: {
-    containedInherit: ({ theme }) => ({
-      color: theme.vars.palette.common.white,
-      backgroundColor: theme.vars.palette.grey[800],
-      '&:hover': {
+    root: ({ theme }) => ({
+      '&.MuiButton-contained.MuiButton-colorInherit': {
         color: theme.vars.palette.common.white,
         backgroundColor: theme.vars.palette.grey[800],
+        '&:hover': {
+          color: theme.vars.palette.common.white,
+          backgroundColor: theme.vars.palette.grey[800],
+        },
       },
     }),
     sizeLarge: {
@@ -48,8 +50,10 @@ const MuiCard: Components<Theme>['MuiCard'] = {
 
 const MuiCardHeader: Components<Theme>['MuiCardHeader'] = {
   defaultProps: {
-    titleTypographyProps: { variant: 'h6' },
-    subheaderTypographyProps: { variant: 'body2' },
+    slotProps: {
+      title: { variant: 'h6' },
+      subheader: { variant: 'body2' },
+    },
   },
   styleOverrides: {
     root: ({ theme }) => ({

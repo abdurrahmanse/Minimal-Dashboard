@@ -15,7 +15,6 @@ import { usePathname } from 'src/routes/hooks';
 import type { WorkspacesPopoverProps } from '../components/workspaces-popover';
 import type { NavItem } from '../nav-config-dashboard';
 
-import { NavUpgrade } from '../components/nav-upgrade';
 import { WorkspacesPopover } from '../components/workspaces-popover';
 
 // ----------------------------------------------------------------------
@@ -184,8 +183,6 @@ export function NavContent({ data, slots, workspaces, sx }: NavContentProps) {
       </Scrollbar>
 
       {slots?.bottomArea}
-
-      <NavUpgrade />
     </>
   );
 }

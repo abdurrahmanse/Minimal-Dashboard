@@ -2,6 +2,12 @@
   "name": "minimal-dashboard",
   "version": "3.0.0",
   "packageManager": "npm@11.19.0",
+  "devEngines": {
+    "packageManager": {
+      "name": "npm",
+      "version": ">=11.0.0"
+    }
+  },
   "private": true,
   "scripts": {
     "postinstall": "node scripts/patch-ts-eslint.js",

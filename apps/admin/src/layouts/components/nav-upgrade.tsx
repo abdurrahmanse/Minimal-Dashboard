@@ -51,14 +51,7 @@ export function NavUpgrade({ sx, ...other }: StackProps) {
         sx={{ width: 200, my: 2 }}
       />
 
-      <Button
-        href="https://material-ui.com/store/items/minimal-dashboard/"
-        target="_blank"
-        variant="contained"
-        color="inherit"
-      >
-        Upgrade to Pro
-      </Button>
+      
     </Box>
   );
 }
