@@ -1,24 +1,21 @@
-import type { CSSObject, Breakpoint } from '@mui/material/styles';
+import type { Breakpoint, CSSObject } from '@mui/material/styles';
 
-import { merge } from 'es-toolkit';
-
+import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
-import Alert from '@mui/material/Alert';
-
+import { merge } from 'es-toolkit';
+import { Logo } from 'src/components/logo';
 import { RouterLink } from 'src/routes/components';
 
-import { Logo } from 'src/components/logo';
-
-import { AuthContent } from './content';
-import { MainSection } from '../core/main-section';
-import { LayoutSection } from '../core/layout-section';
-import { HeaderSection } from '../core/header-section';
-
-import type { AuthContentProps } from './content';
-import type { MainSectionProps } from '../core/main-section';
 import type { HeaderSectionProps } from '../core/header-section';
 import type { LayoutSectionProps } from '../core/layout-section';
+import type { MainSectionProps } from '../core/main-section';
+import type { AuthContentProps } from './content';
+
+import { HeaderSection } from '../core/header-section';
+import { LayoutSection } from '../core/layout-section';
+import { MainSection } from '../core/main-section';
+import { AuthContent } from './content';
 
 // ----------------------------------------------------------------------
 

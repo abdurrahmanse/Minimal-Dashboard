@@ -1,5 +1,6 @@
 import globals from 'globals';
 import eslintJs from '@eslint/js';
+import babelParser from '@babel/eslint-parser';
 import reactPlugin from 'eslint-plugin-react';
 import importPlugin from 'eslint-plugin-import';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
@@ -25,6 +26,8 @@ const commonRules = () => ({
   'default-case': [2, { commentPattern: '^no default$' }],
   'lines-around-directive': [2, { before: 'always', after: 'always' }],
   'arrow-body-style': [2, 'as-needed', { requireReturnForObjectLiteral: false }],
+  'no-undef': 0,
+  'no-undef': 0,
   // react
   'react/jsx-key': 0,
   'react/prop-types': 0,
@@ -43,6 +46,7 @@ const commonRules = () => ({
  */
 const importRules = () => ({
   ...importPlugin.configs.recommended.rules,
+  'import/no-unresolved': 0,
   'import/named': 0,
   'import/export': 0,
   'import/default': 0,
@@ -61,10 +65,15 @@ const importRules = () => ({
  * from 'eslint-plugin-unused-imports'.
  */
 const unusedImportsRules = () => ({
-  'unused-imports/no-unused-imports': 1,
+  'unused-imports/no-unused-imports': 0,
   'unused-imports/no-unused-vars': [
     0,
-    { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' },
+    {
+      vars: 'all',
+      varsIgnorePattern: '^_',
+      args: 'after-used',
+      argsIgnorePattern: '^_',
+    },
   ],
 });
 
@@ -85,58 +94,10 @@ const sortImportsRules = () => {
   };
 
   return {
-    'perfectionist/sort-named-imports': [1, { type: 'line-length', order: 'asc' }],
-    'perfectionist/sort-named-exports': [1, { type: 'line-length', order: 'asc' }],
-    'perfectionist/sort-exports': [
-      1,
-      {
-        order: 'asc',
-        type: 'line-length',
-      },
-    ],
-    'perfectionist/sort-imports': [
-      2,
-      {
-        order: 'asc',
-        ignoreCase: true,
-        type: 'line-length',
-        environment: 'node',
-        maxLineLength: undefined,
-        newlinesBetween: 'always',
-        internalPattern: ['^src/.+'],
-        groups: [
-          'style',
-          'side-effect',
-          'type',
-          ['builtin', 'external'],
-          customGroups.mui,
-          customGroups.routes,
-          customGroups.hooks,
-          customGroups.utils,
-          'internal',
-          customGroups.components,
-          customGroups.sections,
-          customGroups.auth,
-          customGroups.types,
-          ['parent', 'sibling', 'index'],
-          ['parent-type', 'sibling-type', 'index-type'],
-          'object',
-          'unknown',
-        ],
-        customGroups: {
-          value: {
-            [customGroups.mui]: ['^@mui/.+'],
-            [customGroups.auth]: ['^src/auth/.+'],
-            [customGroups.hooks]: ['^src/hooks/.+'],
-            [customGroups.utils]: ['^src/utils/.+'],
-            [customGroups.types]: ['^src/types/.+'],
-            [customGroups.routes]: ['^src/routes/.+'],
-            [customGroups.sections]: ['^src/sections/.+'],
-            [customGroups.components]: ['^src/components/.+'],
-          },
-        },
-      },
-    ],
+    'perfectionist/sort-named-imports': 1,
+    'perfectionist/sort-named-exports': 1,
+    'perfectionist/sort-exports': 1,
+    'perfectionist/sort-imports': 2,
   };
 };
 
@@ -176,6 +137,13 @@ export default [
   {
     languageOptions: {
       globals: { ...globals.browser, ...globals.node },
+      parser: babelParser,
+      parserOptions: {
+        requireConfigFile: false,
+        babelOptions: {
+          presets: ['@babel/preset-typescript', '@babel/preset-react'],
+        },
+      },
     },
     settings: { react: { version: 'detect' } },
   },

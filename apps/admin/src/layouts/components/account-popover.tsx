@@ -1,20 +1,17 @@
 import type { IconButtonProps } from '@mui/material/IconButton';
 
-import { useState, useCallback } from 'react';
-
+import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Avatar from '@mui/material/Avatar';
-import Popover from '@mui/material/Popover';
 import Divider from '@mui/material/Divider';
-import MenuList from '@mui/material/MenuList';
-import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuItem, { menuItemClasses } from '@mui/material/MenuItem';
-
-import { useRouter, usePathname } from 'src/routes/hooks';
-
+import MenuList from '@mui/material/MenuList';
+import Popover from '@mui/material/Popover';
+import Typography from '@mui/material/Typography';
+import { useCallback, useState } from 'react';
 import { _myAccount } from 'src/_mock';
+import { usePathname, useRouter } from 'src/routes/hooks';
 
 // ----------------------------------------------------------------------
 

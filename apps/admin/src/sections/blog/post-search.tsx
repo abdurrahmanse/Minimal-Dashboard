@@ -1,9 +1,8 @@
-import type { Theme, SxProps } from '@mui/material/styles';
+import type { SxProps, Theme } from '@mui/material/styles';
 
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
 import Autocomplete, { autocompleteClasses } from '@mui/material/Autocomplete';
-
+import InputAdornment from '@mui/material/InputAdornment';
+import TextField from '@mui/material/TextField';
 import { Iconify } from 'src/components/iconify';
 
 import type { IPostItem } from './post-item';
@@ -41,7 +40,7 @@ export function PostSearch({ posts, sx }: PostSearchProps) {
           placeholder="Search post..."
           slotProps={{
             input: {
-              ...params.InputProps,
+              ...((params as any).InputProps || params.slotProps?.input),
               startAdornment: (
                 <InputAdornment position="start">
                   <Iconify

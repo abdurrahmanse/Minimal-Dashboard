@@ -1,8 +1,7 @@
 import type { BoxProps } from '@mui/material/Box';
 
-import { mergeClasses } from 'minimal-shared/utils';
-
 import Box from '@mui/material/Box';
+import { mergeClasses } from 'minimal-shared/utils';
 
 import { layoutClasses } from '../core/classes';
 

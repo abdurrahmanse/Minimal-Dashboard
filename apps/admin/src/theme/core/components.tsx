@@ -1,8 +1,7 @@
-import type { Theme, Components } from '@mui/material/styles';
-
-import { varAlpha } from 'minimal-shared/utils';
+import type { Components, Theme } from '@mui/material/styles';
 
 import SvgIcon from '@mui/material/SvgIcon';
+import { varAlpha } from 'minimal-shared/utils';
 
 // ----------------------------------------------------------------------
 

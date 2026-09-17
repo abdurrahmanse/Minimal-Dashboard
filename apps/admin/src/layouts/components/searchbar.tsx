@@ -1,17 +1,15 @@
 import type { BoxProps } from '@mui/material/Box';
 
-import { useState, useCallback } from 'react';
-import { varAlpha } from 'minimal-shared/utils';
-
 import Box from '@mui/material/Box';
-import Slide from '@mui/material/Slide';
-import Input from '@mui/material/Input';
 import Button from '@mui/material/Button';
-import { useTheme } from '@mui/material/styles';
-import IconButton from '@mui/material/IconButton';
-import InputAdornment from '@mui/material/InputAdornment';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
-
+import IconButton from '@mui/material/IconButton';
+import Input from '@mui/material/Input';
+import InputAdornment from '@mui/material/InputAdornment';
+import Slide from '@mui/material/Slide';
+import { useTheme } from '@mui/material/styles';
+import { varAlpha } from 'minimal-shared/utils';
+import { useCallback, useState } from 'react';
 import { Iconify } from 'src/components/iconify';
 
 // ----------------------------------------------------------------------

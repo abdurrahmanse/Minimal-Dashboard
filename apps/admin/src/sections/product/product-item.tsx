@@ -1,13 +1,11 @@
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
 import Card from '@mui/material/Card';
+import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-
-import { fCurrency } from 'src/utils/format-number';
-
-import { Label } from 'src/components/label';
 import { ColorPreview } from 'src/components/color-utils';
+import { Label } from 'src/components/label';
+import { fCurrency } from 'src/utils/format-number';
 
 // ----------------------------------------------------------------------
 

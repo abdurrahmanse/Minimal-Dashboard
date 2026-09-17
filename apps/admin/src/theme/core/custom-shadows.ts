@@ -1,8 +1,8 @@
 import { varAlpha } from 'minimal-shared/utils';
 
-import { grey, info, error, common, primary, success, warning, secondary } from './palette';
-
 import type { ThemeColorScheme } from '../types';
+
+import { common, error, grey, info, primary, secondary, success, warning } from './palette';
 
 // ----------------------------------------------------------------------
 

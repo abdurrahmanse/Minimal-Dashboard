@@ -1,19 +1,16 @@
 import type { CardProps } from '@mui/material/Card';
 import type { IconifyName } from 'src/components/iconify';
 
-import { varAlpha } from 'minimal-shared/utils';
-
-import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
-import Card from '@mui/material/Card';
 import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
-
-import { fDate } from 'src/utils/format-time';
-import { fShortenNumber } from 'src/utils/format-number';
-
+import { varAlpha } from 'minimal-shared/utils';
 import { Iconify } from 'src/components/iconify';
 import { SvgColor } from 'src/components/svg-color';
+import { fShortenNumber } from 'src/utils/format-number';
+import { fDate } from 'src/utils/format-time';
 
 // ----------------------------------------------------------------------
 

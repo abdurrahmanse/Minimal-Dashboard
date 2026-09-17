@@ -2,11 +2,10 @@ import type { CardProps } from '@mui/material/Card';
 import type { ChartOptions } from 'src/components/chart';
 
 import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
 import Divider from '@mui/material/Divider';
 import { useTheme } from '@mui/material/styles';
-import CardHeader from '@mui/material/CardHeader';
-
-import { Chart, useChart, ChartLegends } from 'src/components/chart';
+import { Chart, ChartLegends, useChart } from 'src/components/chart';
 
 // ----------------------------------------------------------------------
 

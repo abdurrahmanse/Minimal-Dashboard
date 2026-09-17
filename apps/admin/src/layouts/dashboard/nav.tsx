@@ -1,25 +1,22 @@
-import type { Theme, SxProps, Breakpoint } from '@mui/material/styles';
-
-import { useEffect } from 'react';
-import { varAlpha } from 'minimal-shared/utils';
+import type { Breakpoint, SxProps, Theme } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
-import ListItem from '@mui/material/ListItem';
-import { useTheme } from '@mui/material/styles';
-import ListItemButton from '@mui/material/ListItemButton';
 import Drawer, { drawerClasses } from '@mui/material/Drawer';
-
-import { usePathname } from 'src/routes/hooks';
-import { RouterLink } from 'src/routes/components';
-
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import { useTheme } from '@mui/material/styles';
+import { varAlpha } from 'minimal-shared/utils';
+import { useEffect } from 'react';
 import { Logo } from 'src/components/logo';
 import { Scrollbar } from 'src/components/scrollbar';
+import { RouterLink } from 'src/routes/components';
+import { usePathname } from 'src/routes/hooks';
+
+import type { WorkspacesPopoverProps } from '../components/workspaces-popover';
+import type { NavItem } from '../nav-config-dashboard';
 
 import { NavUpgrade } from '../components/nav-upgrade';
 import { WorkspacesPopover } from '../components/workspaces-popover';
-
-import type { NavItem } from '../nav-config-dashboard';
-import type { WorkspacesPopoverProps } from '../components/workspaces-popover';
 
 // ----------------------------------------------------------------------
 

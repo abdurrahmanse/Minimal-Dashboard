@@ -43,3 +43,14 @@ if (fs.existsSync(sharedPath)) {
   fs.writeFileSync(sharedPath, content, 'utf8');
   console.log('Successfully patched shared.js to replace ts.Extension!');
 }
+
+const eslintReactPath = path.join(__dirname, '../node_modules/eslint-plugin-react/lib/util/version.js');
+if (fs.existsSync(eslintReactPath)) {
+  let content = fs.readFileSync(eslintReactPath, 'utf8');
+  content = content.replace(
+    /contextOrFilename\.getFilename\(\)/g,
+    "(typeof contextOrFilename.getFilename === 'function' ? contextOrFilename.getFilename() : contextOrFilename.filename || contextOrFilename.physicalFilename || process.cwd())"
+  );
+  fs.writeFileSync(eslintReactPath, content, 'utf8');
+  console.log('Successfully patched eslint-plugin-react!');
+}

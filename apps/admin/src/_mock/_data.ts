@@ -1,14 +1,14 @@
 import {
-  _id,
-  _price,
-  _times,
-  _company,
   _boolean,
-  _fullName,
-  _taskNames,
-  _postTitles,
+  _company,
   _description,
+  _fullName,
+  _id,
+  _postTitles,
+  _price,
   _productNames,
+  _taskNames,
+  _times,
 } from './_mock';
 
 // ----------------------------------------------------------------------

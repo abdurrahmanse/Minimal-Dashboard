@@ -1,10 +1,9 @@
+import { styled } from '@mui/material/styles';
 import { mergeClasses } from 'minimal-shared/utils';
 
-import { styled } from '@mui/material/styles';
+import type { SvgColorProps } from './types';
 
 import { svgColorClasses } from './classes';
-
-import type { SvgColorProps } from './types';
 
 // ----------------------------------------------------------------------
 

@@ -1,5 +1,4 @@
 import { CONFIG } from 'src/config-global';
-
 import { ProductsView } from 'src/sections/product/view';
 
 // ----------------------------------------------------------------------

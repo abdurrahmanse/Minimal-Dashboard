@@ -1,10 +1,9 @@
-import type { Theme, SxProps } from '@mui/material/styles';
-
-import { useCallback } from 'react';
-import { varAlpha, mergeClasses } from 'minimal-shared/utils';
+import type { SxProps, Theme } from '@mui/material/styles';
 
 import ButtonBase from '@mui/material/ButtonBase';
-import { styled, alpha as hexAlpha } from '@mui/material/styles';
+import { alpha as hexAlpha, styled } from '@mui/material/styles';
+import { mergeClasses, varAlpha } from 'minimal-shared/utils';
+import { useCallback } from 'react';
 
 import { Iconify } from '../iconify';
 import { colorPickerClasses } from './classes';

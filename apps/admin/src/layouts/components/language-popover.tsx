@@ -1,13 +1,12 @@
 import type { IconButtonProps } from '@mui/material/IconButton';
 
-import { useState, useCallback } from 'react';
-import { usePopover } from 'minimal-shared/hooks';
-
 import Box from '@mui/material/Box';
-import Popover from '@mui/material/Popover';
-import MenuList from '@mui/material/MenuList';
 import IconButton from '@mui/material/IconButton';
 import MenuItem, { menuItemClasses } from '@mui/material/MenuItem';
+import MenuList from '@mui/material/MenuList';
+import Popover from '@mui/material/Popover';
+import { usePopover } from 'minimal-shared/hooks';
+import { useCallback, useState } from 'react';
 
 // ----------------------------------------------------------------------
 

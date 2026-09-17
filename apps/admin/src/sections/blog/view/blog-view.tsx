@@ -1,20 +1,17 @@
-import { useState, useCallback } from 'react';
-
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
 import Pagination from '@mui/material/Pagination';
-
+import Typography from '@mui/material/Typography';
+import { useCallback, useState } from 'react';
+import { Iconify } from 'src/components/iconify';
 import { DashboardContent } from 'src/layouts/dashboard';
 
-import { Iconify } from 'src/components/iconify';
+import type { IPostItem } from '../post-item';
 
 import { PostItem } from '../post-item';
-import { PostSort } from '../post-sort';
 import { PostSearch } from '../post-search';
-
-import type { IPostItem } from '../post-item';
+import { PostSort } from '../post-sort';
 
 // ----------------------------------------------------------------------
 

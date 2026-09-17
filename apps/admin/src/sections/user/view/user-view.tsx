@@ -1,28 +1,25 @@
-import { useState, useCallback } from 'react';
-
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import Table from '@mui/material/Table';
-import Button from '@mui/material/Button';
 import TableBody from '@mui/material/TableBody';
-import Typography from '@mui/material/Typography';
 import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
-
+import Typography from '@mui/material/Typography';
+import { useCallback, useState } from 'react';
 import { _users } from 'src/_mock';
-import { DashboardContent } from 'src/layouts/dashboard';
-
 import { Iconify } from 'src/components/iconify';
 import { Scrollbar } from 'src/components/scrollbar';
-
-import { TableNoData } from '../table-no-data';
-import { UserTableRow } from '../user-table-row';
-import { UserTableHead } from '../user-table-head';
-import { TableEmptyRows } from '../table-empty-rows';
-import { UserTableToolbar } from '../user-table-toolbar';
-import { emptyRows, applyFilter, getComparator } from '../utils';
+import { DashboardContent } from 'src/layouts/dashboard';
 
 import type { UserProps } from '../user-table-row';
+
+import { TableEmptyRows } from '../table-empty-rows';
+import { TableNoData } from '../table-no-data';
+import { UserTableHead } from '../user-table-head';
+import { UserTableRow } from '../user-table-row';
+import { UserTableToolbar } from '../user-table-toolbar';
+import { applyFilter, emptyRows, getComparator } from '../utils';
 
 // ----------------------------------------------------------------------
 

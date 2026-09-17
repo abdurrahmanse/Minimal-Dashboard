@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     /* Bundler */
-    "baseUrl": ".",
+    "paths": {
+      "*": ["./*"]
+    },
     "ignoreDeprecations": "6.0",
     "module": "ESNext",
     "jsx": "react-jsx",

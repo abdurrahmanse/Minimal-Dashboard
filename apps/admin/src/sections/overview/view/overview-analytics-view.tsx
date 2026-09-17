@@ -1,18 +1,17 @@
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-
+import { _posts, _tasks, _timeline, _traffic } from 'src/_mock';
 import { DashboardContent } from 'src/layouts/dashboard';
-import { _posts, _tasks, _traffic, _timeline } from 'src/_mock';
 
-import { AnalyticsNews } from '../analytics-news';
-import { AnalyticsTasks } from '../analytics-tasks';
+import { AnalyticsConversionRates } from '../analytics-conversion-rates';
+import { AnalyticsCurrentSubject } from '../analytics-current-subject';
 import { AnalyticsCurrentVisits } from '../analytics-current-visits';
+import { AnalyticsNews } from '../analytics-news';
 import { AnalyticsOrderTimeline } from '../analytics-order-timeline';
+import { AnalyticsTasks } from '../analytics-tasks';
+import { AnalyticsTrafficBySite } from '../analytics-traffic-by-site';
 import { AnalyticsWebsiteVisits } from '../analytics-website-visits';
 import { AnalyticsWidgetSummary } from '../analytics-widget-summary';
-import { AnalyticsTrafficBySite } from '../analytics-traffic-by-site';
-import { AnalyticsCurrentSubject } from '../analytics-current-subject';
-import { AnalyticsConversionRates } from '../analytics-conversion-rates';
 
 // ----------------------------------------------------------------------
 

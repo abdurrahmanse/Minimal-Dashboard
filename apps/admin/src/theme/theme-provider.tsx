@@ -3,10 +3,10 @@ import type { ThemeProviderProps as MuiThemeProviderProps } from '@mui/material/
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider as ThemeVarsProvider } from '@mui/material/styles';
 
-import { createTheme } from './create-theme';
-
 import type {} from './extend-theme-types';
 import type { ThemeOptions } from './types';
+
+import { createTheme } from './create-theme';
 
 // ----------------------------------------------------------------------
 

@@ -1,11 +1,9 @@
 import type { LinkProps } from '@mui/material/Link';
 
-import { useId } from 'react';
-import { mergeClasses } from 'minimal-shared/utils';
-
 import Link from '@mui/material/Link';
 import { styled, useTheme } from '@mui/material/styles';
-
+import { mergeClasses } from 'minimal-shared/utils';
+import { useId } from 'react';
 import { RouterLink } from 'src/routes/components';
 
 import { logoClasses } from './classes';

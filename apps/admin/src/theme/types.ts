@@ -1,9 +1,9 @@
 import type {
-  Shadows,
   ColorSystemOptions,
   CssVarsThemeOptions,
-  SupportedColorScheme,
   ThemeOptions as MuiThemeOptions,
+  Shadows,
+  SupportedColorScheme,
 } from '@mui/material/styles';
 
 import type { CustomShadows } from './core/custom-shadows';
