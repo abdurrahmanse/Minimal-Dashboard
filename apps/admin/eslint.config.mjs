@@ -1,6 +1,5 @@
 import globals from 'globals';
 import eslintJs from '@eslint/js';
-import eslintTs from 'typescript-eslint';
 import reactPlugin from 'eslint-plugin-react';
 import importPlugin from 'eslint-plugin-import';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
@@ -36,12 +35,6 @@ const commonRules = () => ({
   'react/react-in-jsx-scope': 0,
   'react/jsx-no-useless-fragment': [1, { allowExpressions: true }],
   'react/jsx-curly-brace-presence': [2, { props: 'never', children: 'never' }],
-  // typescript
-  '@typescript-eslint/no-shadow': 2,
-  '@typescript-eslint/no-explicit-any': 0,
-  '@typescript-eslint/no-empty-object-type': 0,
-  '@typescript-eslint/consistent-type-imports': 1,
-  '@typescript-eslint/no-unused-vars': [1, { args: 'none' }],
 });
 
 /**
@@ -99,7 +92,6 @@ const sortImportsRules = () => {
       {
         order: 'asc',
         type: 'line-length',
-        groupKind: 'values-first',
       },
     ],
     'perfectionist/sort-imports': [
@@ -188,7 +180,6 @@ export default [
     settings: { react: { version: 'detect' } },
   },
   eslintJs.configs.recommended,
-  ...eslintTs.configs.recommended,
   reactPlugin.configs.flat.recommended,
   customConfig,
 ];

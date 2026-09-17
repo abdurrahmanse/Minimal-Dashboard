@@ -14,7 +14,7 @@ export function useChart(updatedOptions?: ChartOptions): ChartOptions {
 
   const baseOptions = baseChartOptions(theme) ?? {};
 
-  return merge(baseOptions, updatedOptions ?? {});
+  return (merge(baseOptions, updatedOptions ?? {}) as any);
 }
 
 // ----------------------------------------------------------------------
@@ -137,7 +137,7 @@ const baseChartOptions = (theme: Theme): ChartOptions => {
     /** **************************************
      * Tooltip
      *************************************** */
-    tooltip: { theme: 'false', fillSeriesColor: false, x: { show: true } },
+    tooltip: { fillSeriesColor: false, x: { show: true } },
 
     /** **************************************
      * Legend
