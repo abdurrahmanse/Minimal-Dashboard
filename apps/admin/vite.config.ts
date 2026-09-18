@@ -33,4 +33,18 @@ export default defineConfig({
   },
   server: { port: PORT, host: true },
   preview: { port: PORT, host: true },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('@mui')) return 'mui';
+            if (id.includes('apexcharts') || id.includes('react-apexcharts')) return 'apexcharts';
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) return 'react';
+            return 'vendor';
+          }
+        },
+      },
+    },
+  },
 });
